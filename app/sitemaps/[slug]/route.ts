@@ -1,6 +1,11 @@
-import { SUPPORTED_LOCALES, CATEGORIES, CATEGORY_TRANSLATIONS, CITIES_BY_COUNTRY, LOCALES, INTENT_TRANSLATIONS, type Locale } from "@/lib/seo-data";
+import { SUPPORTED_LOCALES, CATEGORIES, CATEGORY_TRANSLATIONS, LOCALES, INTENT_TRANSLATIONS, type Locale } from "@/lib/seo-data";
+import citiesData from "@/lib/cities-processed.json";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cbdboutique.xyz";
+
+// Type for cities data
+type CityData = { name: string; slug: string; population: number };
+const CITIES_DB = citiesData as Record<string, CityData[]>;
 
 interface RouteParams {
   params: Promise<{ slug: string }>;
@@ -19,13 +24,14 @@ export async function GET(_request: Request, { params }: RouteParams) {
   const catTranslations = CATEGORY_TRANSLATIONS[cleanLocale] || CATEGORY_TRANSLATIONS.en;
   const intentTranslations = INTENT_TRANSLATIONS[cleanLocale] || INTENT_TRANSLATIONS.en;
 
-  // Get cities for this locale's countries
+  // Get cities for this locale's countries from massive database
   const localeData = LOCALES[cleanLocale];
   const cities: string[] = [];
   for (const country of localeData.countries) {
-    const countryCities = CITIES_BY_COUNTRY[country];
+    const countryCities = CITIES_DB[country];
     if (countryCities) {
-      cities.push(...countryCities.map(c => c.slug));
+      // Take top 500 cities per country by population for manageable sitemap size
+      cities.push(...countryCities.slice(0, 500).map((c: CityData) => c.slug));
     }
   }
 
