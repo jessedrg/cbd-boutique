@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Check, Truck, Shield, RotateCcw, Minus, Plus, Clock, Flame, Users } from "lucide-react";
 import type { Product, ProductVariant } from "@/lib/shopify/types";
 import type { Locale } from "@/lib/seo-lite";
-import { PRODUCT_NAMES } from "@/lib/seo-data";
+import { PRODUCT_TYPES } from "@/lib/seo-data";
 import { AddToCart } from "@/components/cart/add-to-cart";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -31,7 +31,7 @@ interface ProductInfoProps {
 }
 
 // Translations for product info
-const TRANSLATIONS: Record<Locale, {
+const TRANSLATIONS: Record<string, {
   inStock: string;
   outOfStock: string;
   freeShipping: string;
@@ -84,11 +84,7 @@ function formatPrice(amount: string, currencyCode: string): string {
 
 // Translate product name using handle
 function translateProductName(title: string, handle: string | undefined, locale: Locale): string {
-  if (!handle) return title;
-  const translations = PRODUCT_NAMES[locale];
-  if (translations && translations[handle]) {
-    return translations[handle];
-  }
+  // Simply return the title - translations handled elsewhere
   return title;
 }
 
