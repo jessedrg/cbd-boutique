@@ -1,6 +1,6 @@
-import { LOCALES } from "@/lib/seo-lite";
+import { SUPPORTED_LOCALES } from "@/lib/seo-data";
 
-const BASE_URL = "https://vidalib.com";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cbdboutique.xyz";
 
 export async function GET() {
   const urls: string[] = [];
@@ -9,7 +9,7 @@ export async function GET() {
   urls.push(BASE_URL);
   
   // Locale homepages
-  for (const locale of LOCALES) {
+  for (const locale of SUPPORTED_LOCALES) {
     urls.push(`${BASE_URL}/${locale}`);
     urls.push(`${BASE_URL}/${locale}/about`);
     urls.push(`${BASE_URL}/${locale}/contact`);

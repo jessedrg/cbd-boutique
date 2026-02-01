@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const canonicalUrl = `/${locale}`;
   
   return {
-    title: `Vidalib | ${title}`,
+    title: `CBD Boutique | ${title}`,
     description,
     alternates: {
       canonical: canonicalUrl,
@@ -42,10 +42,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ),
     },
     openGraph: {
-      title: `Vidalib | ${title}`,
+      title: `CBD Boutique | ${title}`,
       description,
       url: canonicalUrl,
-      siteName: 'Vidalib',
+      siteName: 'CBD Boutique',
       locale: locale === 'es' ? 'es_ES' : locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
       type: 'website',
       images: [
@@ -53,13 +53,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: '/og-image.jpg',
           width: 1200,
           height: 630,
-          alt: `Vidalib - ${title}`,
+          alt: `CBD Boutique - ${title}`,
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `Vidalib | ${title}`,
+      title: `CBD Boutique | ${title}`,
       description,
       images: ['/og-image.jpg'],
     },

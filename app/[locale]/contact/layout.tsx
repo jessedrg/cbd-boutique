@@ -50,23 +50,23 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
   const canonicalUrl = `/${locale}/contact`;
   
   return {
-    title: `${t.title} | Vidalib`,
+    title: `${t.title} | CBD Boutique`,
     description: t.subtitle,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: `${t.title} | Vidalib`,
+      title: `${t.title} | CBD Boutique`,
       description: t.subtitle,
       url: canonicalUrl,
-      siteName: 'Vidalib',
+      siteName: 'CBD Boutique',
       locale: locale === 'es' ? 'es_ES' : locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
       type: 'website',
       images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: t.title }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${t.title} | Vidalib`,
+      title: `${t.title} | CBD Boutique`,
       description: t.subtitle,
       images: ['/og-image.jpg'],
     },

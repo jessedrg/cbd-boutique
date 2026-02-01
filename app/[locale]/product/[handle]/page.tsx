@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!product) {
     return {
-      title: "Product Not Found | Vidalib",
+      title: "Product Not Found | CBD Boutique",
     };
   }
 
@@ -37,22 +37,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const imageUrl = product.images?.edges?.[0]?.node?.url;
 
   return {
-    title: `${translated.title} | Vidalib`,
-    description: translated.description?.slice(0, 160) || `Buy ${translated.title} at Vidalib`,
+    title: `${translated.title} | CBD Boutique`,
+    description: translated.description?.slice(0, 160) || `Buy ${translated.title} at CBD Boutique`,
     alternates: {
       canonical: `/${locale}/product/${handle}`,
     },
     openGraph: {
-      title: `${translated.title} | Vidalib`,
+      title: `${translated.title} | CBD Boutique`,
       description: translated.description?.slice(0, 160),
       url: `/${locale}/product/${handle}`,
-      siteName: "Vidalib",
+      siteName: "CBD Boutique",
       type: "website",
       images: imageUrl ? [{ url: imageUrl, width: 1200, height: 630, alt: translated.title }] : [],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${translated.title} | Vidalib`,
+      title: `${translated.title} | CBD Boutique`,
       description: translated.description?.slice(0, 160),
       images: imageUrl ? [imageUrl] : [],
     },

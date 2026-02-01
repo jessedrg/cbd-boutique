@@ -3,6 +3,21 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
+// List of known bot/crawler user agents
+const BOT_USER_AGENTS = [
+  'googlebot', 'bingbot', 'slurp', 'duckduckbot', 'baiduspider',
+  'yandexbot', 'sogou', 'exabot', 'facebot', 'facebookexternalhit',
+  'ia_archiver', 'linkedinbot', 'twitterbot', 'pinterest', 'semrushbot',
+  'ahrefsbot', 'mj12bot', 'dotbot', 'petalbot', 'bytespider',
+  'applebot', 'chrome-lighthouse', 'pagespeed', 'gtmetrix', 'pingdom'
+];
+
+function isBot(): boolean {
+  if (typeof window === 'undefined') return true; // SSR = assume bot
+  const ua = navigator.userAgent.toLowerCase();
+  return BOT_USER_AGENTS.some(bot => ua.includes(bot));
+}
+
 const AGE_CONTENT: Record<string, {
   title: string;
   subtitle: string;
@@ -51,6 +66,12 @@ export function AgeVerification() {
   const [locale, setLocale] = useState("en");
 
   useEffect(() => {
+    // Skip for bots/crawlers - let them index the content
+    if (isBot()) {
+      setIsVerified(true);
+      return;
+    }
+
     // Check if already verified
     const verified = localStorage.getItem("age-verified");
     if (verified === "true") {
