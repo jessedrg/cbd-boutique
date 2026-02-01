@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     description: 'Premium CBD products. Organic, lab-tested CBD oils, flowers, cosmetics and edibles. Discreet shipping.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: 'https://images.unsplash.com/photo-1612995923001-27d03779d023?w=1200&h=630&fit=crop&q=80',
         width: 1200,
         height: 630,
         alt: 'CBD Boutique - Premium CBD Products',
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'CBD Boutique | Premium CBD Products',
     description: 'Premium CBD products. Organic, lab-tested. Discreet shipping.',
-    images: ['/og-image.jpg'],
+    images: ['https://images.unsplash.com/photo-1612995923001-27d03779d023?w=1200&h=630&fit=crop&q=80'],
     creator: '@cbdboutique',
   },
   robots: {
