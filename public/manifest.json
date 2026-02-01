@@ -1,0 +1,23 @@
+{
+  "name": "Vidalib - Premium Mobility Solutions",
+  "short_name": "Vidalib",
+  "description": "Premium mobility aids and orthopedic products. Walkers, wheelchairs, canes, and bathroom safety.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a1a1a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-light-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["shopping", "health", "medical"]
+}
