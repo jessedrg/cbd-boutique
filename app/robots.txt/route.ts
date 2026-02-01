@@ -1,8 +1,8 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://vidalib.com'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://cbdboutique.xyz'
 
 export async function GET() {
-  const robotsTxt = `# Vidalib Robots.txt
-# https://vidalib.com
+  const robotsTxt = `# CBD Boutique Robots.txt
+# https://cbdboutique.xyz
 
 User-agent: *
 Allow: /

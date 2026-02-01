@@ -1,72 +1,25 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { Header } from "@/components/store/header";
 import { Features } from "@/components/store/features";
-import { ShopifyProducts } from "@/components/store/shopify-products";
 import { CTA } from "@/components/store/cta";
 import { Footer } from "@/components/store/footer";
-import { formatSlugToTitle, getLocale, getT, type Locale } from "@/lib/seo-lite";
-import { type Category } from "@/lib/seo-data";
-
-// Map translated category slugs to Shopify collection handles
-const COLLECTION_MAP: Record<string, Category> = {
-  // Spanish
-  'sillas-de-ruedas': 'wheelchairs',
-  'andadores': 'walkers',
-  'bastones': 'canes',
-  'seguridad-bano': 'bathroom-safety',
-  'camas': 'beds',
-  'cojines': 'cushions',
-  'rampas': 'ramps',
-  'sillones-elevadores': 'lift-chairs',
-  'scooters': 'scooters',
-  'accesorios': 'accessories',
-  // English
-  'wheelchairs': 'wheelchairs',
-  'walkers': 'walkers',
-  'canes': 'canes',
-  'bathroom-safety': 'bathroom-safety',
-  'beds': 'beds',
-  'cushions': 'cushions',
-  'ramps': 'ramps',
-  'lift-chairs': 'lift-chairs',
-  'scooters': 'scooters',
-  'accessories': 'accessories',
-  // German
-  'rollstuhle': 'wheelchairs',
-  'rollatoren': 'walkers',
-  'gehstocke': 'canes',
-  'badsicherheit': 'bathroom-safety',
-  'betten': 'beds',
-  'kissen': 'cushions',
-  'rampen': 'ramps',
-  'aufstehsessel': 'lift-chairs',
-  'zubehor': 'accessories',
-  // French
-  'fauteuils-roulants': 'wheelchairs',
-  'deambulateurs': 'walkers',
-  'cannes': 'canes',
-  'securite-salle-de-bain': 'bathroom-safety',
-  'lits': 'beds',
-  'coussins': 'cushions',
-  'rampes': 'ramps',
-  'fauteuils-releveurs': 'lift-chairs',
-  'accessoires': 'accessories',
-};
-
-// Extract collection handle from slug parts
-function extractCollectionFromSlug(slugParts: string[]): string | undefined {
-  // Join slug parts and look for category keywords
-  const fullSlug = slugParts.join('-').toLowerCase();
-  
-  // Check each collection key
-  for (const [key, collection] of Object.entries(COLLECTION_MAP)) {
-    if (fullSlug.includes(key)) {
-      return collection;
-    }
-  }
-  
-  return undefined;
-}
+import { 
+  SUPPORTED_LOCALES, 
+  TRANSLATIONS, 
+  CATEGORIES, 
+  CATEGORY_TRANSLATIONS,
+  CITIES_BY_COUNTRY,
+  LOCALES,
+  INTENT_TRANSLATIONS,
+  PREPOSITION_IN,
+  PRODUCT_TYPES,
+  type Locale, 
+  type Category 
+} from "@/lib/seo-data";
+import { Leaf, FlaskConical, Truck, Shield, Check, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 // Force dynamic - no build time generation
 export const dynamic = 'force-dynamic';
@@ -75,143 +28,356 @@ interface PageProps {
   params: Promise<{ locale: string; slug: string[] }>;
 }
 
+// Parse the slug to extract intent, category, and city
+function parseSlug(slugParts: string[], locale: Locale) {
+  const fullSlug = slugParts.join('-').toLowerCase();
+  const catTranslations = CATEGORY_TRANSLATIONS[locale] || CATEGORY_TRANSLATIONS.en;
+  const intentTranslations = INTENT_TRANSLATIONS[locale] || INTENT_TRANSLATIONS.en;
+  
+  let detectedCategory: Category | null = null;
+  let detectedIntent: string | null = null;
+  let detectedCity: { name: string; slug: string } | null = null;
+  
+  // Find category
+  for (const cat of CATEGORIES) {
+    const translatedCat = catTranslations[cat].replace(/ /g, '-').toLowerCase();
+    if (fullSlug.includes(translatedCat) || fullSlug.includes(cat)) {
+      detectedCategory = cat;
+      break;
+    }
+  }
+  
+  // Find intent
+  for (const [intentKey, intentValue] of Object.entries(intentTranslations)) {
+    const intentSlug = intentValue.replace(/ /g, '-').toLowerCase();
+    if (fullSlug.startsWith(intentSlug) || fullSlug.includes(`-${intentSlug}-`)) {
+      detectedIntent = intentKey;
+      break;
+    }
+  }
+  
+  // Find city
+  const localeData = LOCALES[locale];
+  for (const country of localeData.countries) {
+    const cities = CITIES_BY_COUNTRY[country];
+    if (cities) {
+      for (const city of cities) {
+        if (fullSlug.includes(city.slug)) {
+          detectedCity = city;
+          break;
+        }
+      }
+    }
+    if (detectedCity) break;
+  }
+  
+  return { category: detectedCategory, intent: detectedIntent, city: detectedCity };
+}
+
+// Generate SEO-optimized title
+function generateTitle(category: Category | null, intent: string | null, city: { name: string; slug: string } | null, locale: Locale): string {
+  const catTranslations = CATEGORY_TRANSLATIONS[locale] || CATEGORY_TRANSLATIONS.en;
+  const intentTranslations = INTENT_TRANSLATIONS[locale] || INTENT_TRANSLATIONS.en;
+  const preposition = PREPOSITION_IN[locale] || 'in';
+  
+  let title = '';
+  
+  if (intent && intentTranslations[intent as keyof typeof intentTranslations]) {
+    title += intentTranslations[intent as keyof typeof intentTranslations].charAt(0).toUpperCase() + 
+             intentTranslations[intent as keyof typeof intentTranslations].slice(1) + ' ';
+  }
+  
+  if (category) {
+    title += catTranslations[category].charAt(0).toUpperCase() + catTranslations[category].slice(1);
+  }
+  
+  if (city) {
+    title += ` ${preposition} ${city.name}`;
+  }
+  
+  return title || 'CBD Products';
+}
+
+// Generate SEO description
+function generateDescription(category: Category | null, intent: string | null, city: { name: string; slug: string } | null, locale: Locale): string {
+  const t = TRANSLATIONS[locale] || TRANSLATIONS.en;
+  const catTranslations = CATEGORY_TRANSLATIONS[locale] || CATEGORY_TRANSLATIONS.en;
+  
+  const categoryName = category ? catTranslations[category] : 'CBD';
+  const cityText = city ? ` ${PREPOSITION_IN[locale]} ${city.name}` : '';
+  
+  const descriptions: Record<string, string> = {
+    es: `Compra ${categoryName}${cityText} de la más alta calidad. Productos orgánicos, testados en laboratorio, envío discreto 24-48h. ✓ Legal ✓ Certificado ✓ Garantía`,
+    en: `Buy ${categoryName}${cityText} of the highest quality. Organic, lab-tested products, discreet shipping 24-48h. ✓ Legal ✓ Certified ✓ Guaranteed`,
+    de: `Kaufen Sie ${categoryName}${cityText} in höchster Qualität. Bio, laborgetestet, diskreter Versand 24-48h. ✓ Legal ✓ Zertifiziert ✓ Garantiert`,
+    fr: `Achetez ${categoryName}${cityText} de la plus haute qualité. Bio, testé en labo, livraison discrète 24-48h. ✓ Légal ✓ Certifié ✓ Garanti`,
+  };
+  
+  return descriptions[locale] || descriptions.en;
+}
+
 export async function generateStaticParams() {
   return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const t = getT(locale);
-  const title = formatSlugToTitle(slug?.join('-') || '');
-  const pageTitle = title || t.products;
-  const description = `${pageTitle}. ${t.shipping}. ${t.warranty}. ${t.support}. ${t.qualityDesc}`;
+  const validLocale = SUPPORTED_LOCALES.includes(locale as Locale) ? locale as Locale : 'en';
+  const { category, intent, city } = parseSlug(slug || [], validLocale);
+  
+  const title = generateTitle(category, intent, city, validLocale);
+  const description = generateDescription(category, intent, city, validLocale);
   const canonicalUrl = `/${locale}/${slug?.join('/') || ''}`;
   
   return {
-    title: pageTitle,
+    title,
     description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
+    alternates: { canonical: canonicalUrl },
     openGraph: {
-      title: `${pageTitle} | Vidalib`,
+      title: `${title} | CBD Boutique`,
       description,
       url: canonicalUrl,
-      siteName: 'Vidalib',
+      siteName: 'CBD Boutique',
       locale: locale === 'es' ? 'es_ES' : locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
       type: 'website',
-      images: [
-        {
-          url: '/og-image.jpg',
-          width: 1200,
-          height: 630,
-          alt: `${pageTitle} - Vidalib`,
-        },
-      ],
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${pageTitle} | Vidalib`,
+      title: `${title} | CBD Boutique`,
       description,
       images: ['/og-image.jpg'],
     },
-    robots: {
-      index: true,
-      follow: true,
-    },
+    robots: { index: true, follow: true },
   };
 }
 
 export default async function DynamicPage({ params }: PageProps) {
   const { locale, slug } = await params;
-  const validLocale = getLocale(locale);
-  const t = getT(locale);
-  const pageTitle = formatSlugToTitle(slug?.join('-') || '') || t.products;
+  const validLocale = SUPPORTED_LOCALES.includes(locale as Locale) ? locale as Locale : 'en';
+  const t = TRANSLATIONS[validLocale] || TRANSLATIONS.en;
+  const catTranslations = CATEGORY_TRANSLATIONS[validLocale] || CATEGORY_TRANSLATIONS.en;
   
-  // Extract collection from slug for product filtering
-  const collection = extractCollectionFromSlug(slug || []);
+  const { category, intent, city } = parseSlug(slug || [], validLocale);
+  const pageTitle = generateTitle(category, intent, city, validLocale);
+  const pageDescription = generateDescription(category, intent, city, validLocale);
+  
+  // Get product types for this category
+  const productTypes = category ? PRODUCT_TYPES[category] : [];
+  
+  // Get related categories
+  const relatedCategories = CATEGORIES.filter(c => c !== category).slice(0, 4);
+
+  // Category images
+  const categoryImages: Record<Category, string> = {
+    'cbd-oil': 'https://images.unsplash.com/photo-1556928045-16f7f50be0f3?w=800&h=600&fit=crop',
+    'cbd-flowers': 'https://images.unsplash.com/photo-1603909223429-69bb7101f420?w=800&h=600&fit=crop',
+    'cbd-edibles': 'https://images.unsplash.com/photo-1629398778375-39113a6d6d1a?w=800&h=600&fit=crop',
+    'cbd-cosmetics': 'https://images.unsplash.com/photo-1584091779872-08a4377c24be?w=800&h=600&fit=crop',
+    'cbd-vape': 'https://images.unsplash.com/photo-1605117913123-1f455435b384?w=800&h=600&fit=crop',
+    'cbd-capsules': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=800&h=600&fit=crop',
+    'cbd-pets': 'https://moosesmokeshop.com/cdn/shop/products/cbd_pet_canninus_grandes.jpg?v=1689900237',
+    'cbd-isolate': 'https://theimperiumcbd.com/wp-content/uploads/2022/12/CBD-Isolate-scaled-scaled.jpg',
+    'cbd-topicals': 'https://www.beautymarket.es/estetica/fotos/33164_bew3.jpg',
+    'cbd-tinctures': 'https://images.unsplash.com/photo-1556928045-16f7f50be0f3?w=800&h=600&fit=crop',
+  };
+
+  const heroImage = category ? categoryImages[category] : 'https://images.unsplash.com/photo-1617101815102-e5728e6685fc?w=1920&h=1080&fit=crop';
 
   return (
     <main className="min-h-screen bg-background">
-      <Header locale={validLocale} />
+      <Header locale={validLocale} transparent />
       
-      <section className="pt-24 pb-12 lg:pt-32 lg:pb-16 bg-gradient-to-b from-muted/50 to-background">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <nav className="text-sm text-muted-foreground mb-4">
-            <a href={`/${validLocale}`} className="hover:text-foreground">{t.home}</a>
-            <span className="mx-2">/</span>
-            <span className="text-foreground">{pageTitle}</span>
-          </nav>
-          
-          <h1 className="text-3xl lg:text-5xl font-serif font-medium tracking-tight mb-6 text-balance">
-            {pageTitle}
-          </h1>
-          
-          <p className="text-lg text-muted-foreground max-w-3xl mb-8">
-            {t.description}
-          </p>
-          
-          <div className="flex flex-wrap gap-3 text-sm">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-background rounded-full border">
-              <span className="w-2 h-2 bg-green-500 rounded-full" />
-              {t.shipping}
-            </span>
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-background rounded-full border">
-              <span className="w-2 h-2 bg-green-500 rounded-full" />
-              {t.warranty}
-            </span>
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-background rounded-full border">
-              <span className="w-2 h-2 bg-green-500 rounded-full" />
-              {t.support}
-            </span>
+      {/* Hero Section */}
+      <section className="relative min-h-[60vh] flex items-center">
+        <div className="absolute inset-0">
+          <Image
+            src={heroImage}
+            alt={pageTitle}
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+        </div>
+        
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-32">
+          <div className="max-w-2xl">
+            {/* Breadcrumb */}
+            <nav className="flex items-center gap-2 text-white/60 text-sm mb-6">
+              <Link href={`/${validLocale}`} className="hover:text-white transition-colors">
+                {t.nav.home}
+              </Link>
+              <span>/</span>
+              {category && (
+                <>
+                  <Link href={`/${validLocale}/${category}`} className="hover:text-white transition-colors capitalize">
+                    {catTranslations[category]}
+                  </Link>
+                  {city && <span>/</span>}
+                </>
+              )}
+              {city && <span className="text-white">{city.name}</span>}
+            </nav>
+            
+            {/* Title */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-white tracking-tight mb-6">
+              {pageTitle}
+            </h1>
+            
+            {/* Description */}
+            <p className="text-lg text-white/80 font-light mb-8 max-w-xl">
+              {pageDescription}
+            </p>
+            
+            {/* Trust badges */}
+            <div className="flex flex-wrap gap-4 mb-8">
+              {[
+                { icon: Leaf, text: locale === 'es' ? 'Orgánico' : 'Organic' },
+                { icon: FlaskConical, text: locale === 'es' ? 'Testado' : 'Lab Tested' },
+                { icon: Truck, text: locale === 'es' ? 'Envío 24h' : '24h Shipping' },
+                { icon: Shield, text: locale === 'es' ? 'Legal' : 'Legal' },
+              ].map((badge, i) => (
+                <div key={i} className="flex items-center gap-2 text-white/80 text-sm">
+                  <badge.icon className="h-4 w-4" strokeWidth={1.5} />
+                  <span>{badge.text}</span>
+                </div>
+              ))}
+            </div>
+            
+            {/* CTA */}
+            <Button size="lg" className="h-14 px-10 text-xs uppercase tracking-[0.2em] font-medium rounded-none" asChild>
+              <Link href={`/${validLocale}/${category || 'cbd-oil'}`}>
+                {t.hero.cta}
+                <ArrowRight className="ml-3 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
 
+      {/* Features */}
       <Features locale={validLocale} />
-      <ShopifyProducts locale={validLocale} collection={collection} title={pageTitle} limit={12} />
-      
-      <section className="py-16 bg-muted/30">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-2xl font-serif font-medium mb-4">{pageTitle}</h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                {t.description}
-              </p>
-              <ul className="space-y-2 text-muted-foreground">
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-accent rounded-full" />
-                  {t.shipping}
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-accent rounded-full" />
-                  {t.warranty}
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-accent rounded-full" />
-                  {t.support}
-                </li>
-              </ul>
+
+      {/* Product Types Section */}
+      {productTypes.length > 0 && (
+        <section className="py-24 bg-muted/30">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
+                {locale === 'es' ? 'Tipos de Producto' : 'Product Types'}
+              </span>
+              <h2 className="text-3xl lg:text-4xl font-serif font-light tracking-tight">
+                {category ? catTranslations[category] : 'CBD'} {locale === 'es' ? 'Disponibles' : 'Available'}
+              </h2>
             </div>
-            <div className="space-y-4">
-              <div className="p-4 bg-background rounded-lg border">
-                <h4 className="font-medium mb-1">{t.warranty}</h4>
-                <p className="text-sm text-muted-foreground">{t.qualityDesc}</p>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              {productTypes.map((type) => (
+                <Link
+                  key={type}
+                  href={`/${validLocale}/${category}-${type}`}
+                  className="group p-6 bg-background border border-border/50 hover:border-foreground/20 transition-colors text-center"
+                >
+                  <h3 className="text-sm font-medium capitalize group-hover:text-foreground/80 transition-colors">
+                    {type.replace(/-/g, ' ')}
+                  </h3>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Local SEO Content Section */}
+      {city && (
+        <section className="py-24">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
+                  {locale === 'es' ? `CBD en ${city.name}` : `CBD in ${city.name}`}
+                </span>
+                <h2 className="text-3xl lg:text-4xl font-serif font-light tracking-tight mb-6">
+                  {locale === 'es' 
+                    ? `Tu tienda de CBD de confianza en ${city.name}` 
+                    : `Your trusted CBD shop in ${city.name}`}
+                </h2>
+                <div className="space-y-4 text-muted-foreground font-light">
+                  <p>
+                    {locale === 'es'
+                      ? `Descubre la mejor selección de productos CBD premium en ${city.name}. Ofrecemos envío discreto y rápido a toda la ciudad y alrededores.`
+                      : `Discover the best selection of premium CBD products in ${city.name}. We offer discreet and fast shipping throughout the city and surrounding areas.`}
+                  </p>
+                  <p>
+                    {locale === 'es'
+                      ? `Todos nuestros productos son 100% legales, orgánicos y testados en laboratorios independientes. Garantizamos la máxima calidad y pureza.`
+                      : `All our products are 100% legal, organic and tested in independent laboratories. We guarantee the highest quality and purity.`}
+                  </p>
+                </div>
+                
+                <ul className="mt-8 space-y-3">
+                  {[
+                    locale === 'es' ? 'Envío discreto en 24-48h' : 'Discreet shipping in 24-48h',
+                    locale === 'es' ? 'Productos certificados y legales' : 'Certified and legal products',
+                    locale === 'es' ? 'Atención al cliente especializada' : 'Specialized customer service',
+                    locale === 'es' ? 'Garantía de satisfacción' : 'Satisfaction guarantee',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3">
+                      <Check className="h-4 w-4 text-foreground/70" strokeWidth={2} />
+                      <span className="text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="p-4 bg-background rounded-lg border">
-                <h4 className="font-medium mb-1">{t.shipping}</h4>
-                <p className="text-sm text-muted-foreground">{t.deliveryDesc}</p>
-              </div>
-              <div className="p-4 bg-background rounded-lg border">
-                <h4 className="font-medium mb-1">{t.support}</h4>
-                <p className="text-sm text-muted-foreground">{t.supportDesc}</p>
+              
+              <div className="relative aspect-square">
+                <Image
+                  src={heroImage}
+                  alt={`CBD ${city.name}`}
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
+        </section>
+      )}
+
+      {/* Related Categories */}
+      <section className="py-24 bg-muted/30">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-serif font-light tracking-tight">
+              {locale === 'es' ? 'Otras Categorías' : 'Other Categories'}
+            </h2>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {relatedCategories.map((cat) => (
+              <Link
+                key={cat}
+                href={`/${validLocale}/${cat}`}
+                className="group relative aspect-[3/4] overflow-hidden bg-muted"
+              >
+                <Image
+                  src={categoryImages[cat]}
+                  alt={catTranslations[cat]}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-lg text-white font-serif font-light capitalize">
+                    {catTranslations[cat]}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
-      
+
       <CTA locale={validLocale} />
       <Footer locale={validLocale} />
     </main>

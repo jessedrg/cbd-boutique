@@ -1,11 +1,11 @@
-import { LOCALES } from "@/lib/seo-lite";
+import { SUPPORTED_LOCALES } from "@/lib/seo-data";
 
-const BASE_URL = "https://vidalib.com";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cbdboutique.xyz";
 
 export async function GET() {
   const sitemaps = [
     `${BASE_URL}/sitemaps/pages.xml`,
-    ...LOCALES.map(locale => `${BASE_URL}/sitemaps/${locale}.xml`),
+    ...SUPPORTED_LOCALES.map(locale => `${BASE_URL}/sitemaps/${locale}.xml`),
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
