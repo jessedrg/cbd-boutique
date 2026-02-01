@@ -1,8 +1,8 @@
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://cbdboutique.xyz'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://cbdboutique.io'
 
 export async function GET() {
   const robotsTxt = `# CBD Boutique Robots.txt
-# https://cbdboutique.xyz
+# https://cbdboutique.io
 
 User-agent: *
 Allow: /
