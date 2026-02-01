@@ -10,7 +10,6 @@ import {
   TRANSLATIONS, 
   CATEGORIES, 
   CATEGORY_TRANSLATIONS,
-  CITIES_BY_COUNTRY,
   LOCALES,
   INTENT_TRANSLATIONS,
   PREPOSITION_IN,
@@ -18,6 +17,11 @@ import {
   type Locale, 
   type Category 
 } from "@/lib/seo-data";
+import citiesData from "@/lib/cities-processed.json";
+
+// Type for cities data
+type CityData = { name: string; slug: string; population: number };
+const CITIES_DB = citiesData as Record<string, CityData[]>;
 import { Leaf, FlaskConical, Truck, Shield, Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -56,14 +60,14 @@ function parseSlug(slugParts: string[], locale: Locale) {
     }
   }
   
-  // Find city
+  // Find city from massive database
   const localeData = LOCALES[locale];
   for (const country of localeData.countries) {
-    const cities = CITIES_BY_COUNTRY[country];
+    const cities = CITIES_DB[country];
     if (cities) {
       for (const city of cities) {
         if (fullSlug.includes(city.slug)) {
-          detectedCity = city;
+          detectedCity = { name: city.name, slug: city.slug };
           break;
         }
       }
@@ -111,6 +115,12 @@ function generateDescription(category: Category | null, intent: string | null, c
     en: `Buy ${categoryName}${cityText} of the highest quality. Organic, lab-tested products, discreet shipping 24-48h. ✓ Legal ✓ Certified ✓ Guaranteed`,
     de: `Kaufen Sie ${categoryName}${cityText} in höchster Qualität. Bio, laborgetestet, diskreter Versand 24-48h. ✓ Legal ✓ Zertifiziert ✓ Garantiert`,
     fr: `Achetez ${categoryName}${cityText} de la plus haute qualité. Bio, testé en labo, livraison discrète 24-48h. ✓ Légal ✓ Certifié ✓ Garanti`,
+    it: `Acquista ${categoryName}${cityText} della massima qualità. Biologico, testato in laboratorio, spedizione discreta 24-48h. ✓ Legale ✓ Certificato ✓ Garantito`,
+    pt: `Compre ${categoryName}${cityText} da mais alta qualidade. Orgânico, testado em laboratório, envio discreto 24-48h. ✓ Legal ✓ Certificado ✓ Garantido`,
+    nl: `Koop ${categoryName}${cityText} van de hoogste kwaliteit. Biologisch, labgetest, discrete verzending 24-48u. ✓ Legaal ✓ Gecertificeerd ✓ Gegarandeerd`,
+    pl: `Kup ${categoryName}${cityText} najwyższej jakości. Organiczne, testowane laboratoryjnie, dyskretna wysyłka 24-48h. ✓ Legalny ✓ Certyfikowany ✓ Gwarantowany`,
+    cs: `Kupte ${categoryName}${cityText} nejvyšší kvality. Bio, laboratorně testované, diskrétní doručení 24-48h. ✓ Legální ✓ Certifikováno ✓ Zaručeno`,
+    el: `Αγοράστε ${categoryName}${cityText} υψηλότερης ποιότητας. Βιολογικό, εργαστηριακά ελεγμένο, διακριτική αποστολή 24-48ω. ✓ Νόμιμο ✓ Πιστοποιημένο ✓ Εγγυημένο`,
   };
   
   return descriptions[locale] || descriptions.en;
@@ -230,13 +240,13 @@ export default async function DynamicPage({ params }: PageProps) {
               {pageDescription}
             </p>
             
-            {/* Trust badges */}
+            {/* Trust badges - translated for all locales */}
             <div className="flex flex-wrap gap-4 mb-8">
               {[
-                { icon: Leaf, text: locale === 'es' ? 'Orgánico' : 'Organic' },
-                { icon: FlaskConical, text: locale === 'es' ? 'Testado' : 'Lab Tested' },
-                { icon: Truck, text: locale === 'es' ? 'Envío 24h' : '24h Shipping' },
-                { icon: Shield, text: locale === 'es' ? 'Legal' : 'Legal' },
+                { icon: Leaf, text: { es: 'Orgánico', en: 'Organic', de: 'Bio', fr: 'Bio', it: 'Biologico', pt: 'Orgânico', nl: 'Biologisch', pl: 'Organiczny', cs: 'Bio', el: 'Βιολογικό' }[validLocale] || 'Organic' },
+                { icon: FlaskConical, text: { es: 'Testado', en: 'Lab Tested', de: 'Laborgetestet', fr: 'Testé Labo', it: 'Testato', pt: 'Testado', nl: 'Labgetest', pl: 'Testowany', cs: 'Testováno', el: 'Ελεγμένο' }[validLocale] || 'Lab Tested' },
+                { icon: Truck, text: { es: 'Envío 24h', en: '24h Shipping', de: 'Versand 24h', fr: 'Livraison 24h', it: 'Spedizione 24h', pt: 'Envio 24h', nl: 'Verzending 24u', pl: 'Wysyłka 24h', cs: 'Doručení 24h', el: 'Αποστολή 24ω' }[validLocale] || '24h Shipping' },
+                { icon: Shield, text: { es: 'Legal', en: 'Legal', de: 'Legal', fr: 'Légal', it: 'Legale', pt: 'Legal', nl: 'Legaal', pl: 'Legalny', cs: 'Legální', el: 'Νόμιμο' }[validLocale] || 'Legal' },
               ].map((badge, i) => (
                 <div key={i} className="flex items-center gap-2 text-white/80 text-sm">
                   <badge.icon className="h-4 w-4" strokeWidth={1.5} />
