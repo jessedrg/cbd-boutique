@@ -131,6 +131,17 @@ export async function generateStaticParams() {
   return [];
 }
 
+// Category images for OG
+const OG_IMAGES: Record<string, string> = {
+  'cbd-oil': 'https://images.unsplash.com/photo-1556928045-16f7f50be0f3?w=1200&h=630&fit=crop',
+  'cbd-flowers': 'https://images.unsplash.com/photo-1603909223429-69bb7101f420?w=1200&h=630&fit=crop',
+  'cbd-edibles': 'https://images.unsplash.com/photo-1629398778375-39113a6d6d1a?w=1200&h=630&fit=crop',
+  'cbd-cosmetics': 'https://images.unsplash.com/photo-1584091779872-08a4377c24be?w=1200&h=630&fit=crop',
+  'cbd-vape': 'https://images.unsplash.com/photo-1605117913123-1f455435b384?w=1200&h=630&fit=crop',
+  'cbd-capsules': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1200&h=630&fit=crop',
+  'default': 'https://images.unsplash.com/photo-1612995923001-27d03779d023?w=1200&h=630&fit=crop',
+};
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const validLocale = SUPPORTED_LOCALES.includes(locale as Locale) ? locale as Locale : 'en';
@@ -139,6 +150,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = generateTitle(category, intent, city, validLocale);
   const description = generateDescription(category, intent, city, validLocale);
   const canonicalUrl = `/${locale}/${slug?.join('/') || ''}`;
+  const ogImage = category ? (OG_IMAGES[category] || OG_IMAGES.default) : OG_IMAGES.default;
   
   return {
     title,
@@ -151,13 +163,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: 'CBD Boutique',
       locale: locale === 'es' ? 'es_ES' : locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
       type: 'website',
-      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: title }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${title} | CBD Boutique`,
       description,
-      images: ['/og-image.jpg'],
+      images: [ogImage],
     },
     robots: { index: true, follow: true },
   };
