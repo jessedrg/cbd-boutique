@@ -57,13 +57,16 @@ export function Hero({ locale, cityName }: HeroProps) {
           <div className="flex flex-col sm:flex-row gap-4">
             <Button 
               size="lg" 
-              className="h-14 px-10 text-xs uppercase tracking-[0.2em] font-medium rounded-none" 
-              asChild
+              className="h-14 px-10 text-xs uppercase tracking-[0.2em] font-medium rounded-none cursor-pointer" 
+              onClick={() => {
+                const collectionsSection = document.getElementById('collections');
+                if (collectionsSection) {
+                  collectionsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
             >
-              <Link href={`/${locale === 'en' ? '' : locale + '/'}cbd-oil`}>
-                {t.hero.cta}
-                <ArrowRight className="ml-3 h-4 w-4" />
-              </Link>
+              {t.hero.cta}
+              <ArrowRight className="ml-3 h-4 w-4" />
             </Button>
             <Button 
               variant="outline" 

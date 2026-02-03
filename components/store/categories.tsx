@@ -42,7 +42,7 @@ export function Categories({ locale }: CategoriesProps) {
   const otherCategories = CATEGORIES.slice(4);
 
   return (
-    <section className="py-24 lg:py-32">
+    <section id="collections" className="py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
