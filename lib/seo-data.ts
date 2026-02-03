@@ -618,6 +618,88 @@ export const CATEGORIES = [
 
 export type Category = typeof CATEGORIES[number];
 
+// Localized slugs for URLs
+export const CATEGORY_SLUGS: Record<Locale, Record<Category, string>> = {
+  es: {
+    'cbd-oil': 'aceite-cbd', 'cbd-flowers': 'flores-cbd', 'cbd-edibles': 'comestibles-cbd',
+    'cbd-cosmetics': 'cosmetica-cbd', 'cbd-vape': 'vape-cbd', 'cbd-capsules': 'capsulas-cbd',
+    'cbd-pets': 'cbd-mascotas', 'cbd-isolate': 'aislado-cbd', 'cbd-topicals': 'topicos-cbd',
+    'cbd-tinctures': 'tinturas-cbd',
+  },
+  en: {
+    'cbd-oil': 'cbd-oil', 'cbd-flowers': 'cbd-flowers', 'cbd-edibles': 'cbd-edibles',
+    'cbd-cosmetics': 'cbd-cosmetics', 'cbd-vape': 'cbd-vape', 'cbd-capsules': 'cbd-capsules',
+    'cbd-pets': 'cbd-pets', 'cbd-isolate': 'cbd-isolate', 'cbd-topicals': 'cbd-topicals',
+    'cbd-tinctures': 'cbd-tinctures',
+  },
+  de: {
+    'cbd-oil': 'cbd-oel', 'cbd-flowers': 'cbd-blueten', 'cbd-edibles': 'cbd-lebensmittel',
+    'cbd-cosmetics': 'cbd-kosmetik', 'cbd-vape': 'cbd-vape', 'cbd-capsules': 'cbd-kapseln',
+    'cbd-pets': 'cbd-haustiere', 'cbd-isolate': 'cbd-isolat', 'cbd-topicals': 'cbd-salben',
+    'cbd-tinctures': 'cbd-tinkturen',
+  },
+  fr: {
+    'cbd-oil': 'huile-cbd', 'cbd-flowers': 'fleurs-cbd', 'cbd-edibles': 'comestibles-cbd',
+    'cbd-cosmetics': 'cosmetiques-cbd', 'cbd-vape': 'vape-cbd', 'cbd-capsules': 'gelules-cbd',
+    'cbd-pets': 'cbd-animaux', 'cbd-isolate': 'isolat-cbd', 'cbd-topicals': 'topiques-cbd',
+    'cbd-tinctures': 'teintures-cbd',
+  },
+  it: {
+    'cbd-oil': 'olio-cbd', 'cbd-flowers': 'fiori-cbd', 'cbd-edibles': 'edibili-cbd',
+    'cbd-cosmetics': 'cosmetici-cbd', 'cbd-vape': 'vape-cbd', 'cbd-capsules': 'capsule-cbd',
+    'cbd-pets': 'cbd-animali', 'cbd-isolate': 'isolato-cbd', 'cbd-topicals': 'topici-cbd',
+    'cbd-tinctures': 'tinture-cbd',
+  },
+  pt: {
+    'cbd-oil': 'oleo-cbd', 'cbd-flowers': 'flores-cbd', 'cbd-edibles': 'comestiveis-cbd',
+    'cbd-cosmetics': 'cosmeticos-cbd', 'cbd-vape': 'vape-cbd', 'cbd-capsules': 'capsulas-cbd',
+    'cbd-pets': 'cbd-animais', 'cbd-isolate': 'isolado-cbd', 'cbd-topicals': 'topicos-cbd',
+    'cbd-tinctures': 'tinturas-cbd',
+  },
+  nl: {
+    'cbd-oil': 'cbd-olie', 'cbd-flowers': 'cbd-bloemen', 'cbd-edibles': 'cbd-eetbaar',
+    'cbd-cosmetics': 'cbd-cosmetica', 'cbd-vape': 'cbd-vape', 'cbd-capsules': 'cbd-capsules',
+    'cbd-pets': 'cbd-huisdieren', 'cbd-isolate': 'cbd-isolaat', 'cbd-topicals': 'cbd-zalven',
+    'cbd-tinctures': 'cbd-tincturen',
+  },
+  pl: {
+    'cbd-oil': 'olej-cbd', 'cbd-flowers': 'kwiaty-cbd', 'cbd-edibles': 'jedzenie-cbd',
+    'cbd-cosmetics': 'kosmetyki-cbd', 'cbd-vape': 'vape-cbd', 'cbd-capsules': 'kapsulki-cbd',
+    'cbd-pets': 'cbd-zwierzeta', 'cbd-isolate': 'izolat-cbd', 'cbd-topicals': 'masci-cbd',
+    'cbd-tinctures': 'nalewki-cbd',
+  },
+  cs: {
+    'cbd-oil': 'cbd-olej', 'cbd-flowers': 'cbd-kvety', 'cbd-edibles': 'cbd-jidlo',
+    'cbd-cosmetics': 'cbd-kosmetika', 'cbd-vape': 'cbd-vape', 'cbd-capsules': 'cbd-kapsle',
+    'cbd-pets': 'cbd-mazlicci', 'cbd-isolate': 'cbd-izolat', 'cbd-topicals': 'cbd-masti',
+    'cbd-tinctures': 'cbd-tinktury',
+  },
+  el: {
+    'cbd-oil': 'elaio-cbd', 'cbd-flowers': 'anthi-cbd', 'cbd-edibles': 'edodima-cbd',
+    'cbd-cosmetics': 'kallyntika-cbd', 'cbd-vape': 'vape-cbd', 'cbd-capsules': 'kapsoules-cbd',
+    'cbd-pets': 'cbd-katoikidia', 'cbd-isolate': 'apomonomeno-cbd', 'cbd-topicals': 'topika-cbd',
+    'cbd-tinctures': 'vammata-cbd',
+  },
+};
+
+// Get localized slug for a category
+export function getLocalizedCategorySlug(category: Category, locale: Locale): string {
+  return CATEGORY_SLUGS[locale]?.[category] || category;
+}
+
+// Get category from any localized slug
+export function getCategoryFromSlug(slug: string): Category | undefined {
+  // First check if it's a direct category
+  if (CATEGORIES.includes(slug as Category)) return slug as Category;
+  // Then check all localized slugs
+  for (const locale of SUPPORTED_LOCALES) {
+    for (const [cat, localSlug] of Object.entries(CATEGORY_SLUGS[locale] || {})) {
+      if (localSlug === slug) return cat as Category;
+    }
+  }
+  return undefined;
+}
+
 export const PRODUCT_TYPES: Record<Category, string[]> = {
   'cbd-oil': ['full-spectrum', 'broad-spectrum', 'isolate', '5-percent', '10-percent', '15-percent', '20-percent', '30-percent', 'organic', 'premium'],
   'cbd-flowers': ['indoor', 'outdoor', 'greenhouse', 'premium', 'sativa', 'indica', 'hybrid', 'organic', 'trimmed', 'untrimmed'],
