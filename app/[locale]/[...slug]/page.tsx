@@ -24,6 +24,7 @@ type CityData = { name: string; slug: string; population: number };
 const CITIES_DB = citiesData as Record<string, CityData[]>;
 import { Leaf, FlaskConical, Truck, Shield, Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FAQSection, ProductSchema } from "@/components/seo/faq-section";
 
 // Force dynamic - no build time generation
 export const dynamic = 'force-dynamic';
@@ -387,6 +388,25 @@ export default async function DynamicPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section with Schema */}
+      <FAQSection 
+        locale={validLocale} 
+        product={category ? catTranslations[category] : 'CBD'} 
+        city={city?.name}
+        priceMin={15}
+        priceMax={150}
+      />
+
+      {/* Product Schema */}
+      <ProductSchema
+        name={pageTitle}
+        description={pageDescription}
+        priceMin={15}
+        priceMax={150}
+        brand="CBD Boutique"
+        image={heroImage}
+      />
 
       <CTA locale={validLocale} />
       <Footer locale={validLocale} />
