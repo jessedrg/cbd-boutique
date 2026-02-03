@@ -5,6 +5,8 @@ import { Header } from "@/components/store/header";
 import { Features } from "@/components/store/features";
 import { CTA } from "@/components/store/cta";
 import { Footer } from "@/components/store/footer";
+import { ShopifyProducts } from "@/components/store/shopify-products";
+import { ScrollToProductsButton } from "@/components/store/scroll-to-products";
 import { 
   SUPPORTED_LOCALES, 
   TRANSLATIONS, 
@@ -22,7 +24,7 @@ import citiesData from "@/lib/cities-processed.json";
 // Type for cities data
 type CityData = { name: string; slug: string; population: number };
 const CITIES_DB = citiesData as Record<string, CityData[]>;
-import { Leaf, FlaskConical, Truck, Shield, Check, ArrowRight } from "lucide-react";
+import { Leaf, FlaskConical, Truck, Shield, Check, ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FAQSection, ProductSchema } from "@/components/seo/faq-section";
 
@@ -207,194 +209,218 @@ export default async function DynamicPage({ params }: PageProps) {
 
   const heroImage = category ? categoryImages[category] : 'https://images.unsplash.com/photo-1617101815102-e5728e6685fc?w=1920&h=1080&fit=crop';
 
+  // Translations for the page
+  const texts: Record<string, { viewProducts: string; from: string; reviews: string; trusted: string }> = {
+    es: { viewProducts: 'Ver Productos', from: 'Desde', reviews: 'Lo que dicen nuestros clientes', trusted: 'Tienda de confianza' },
+    en: { viewProducts: 'View Products', from: 'From', reviews: 'What our customers say', trusted: 'Trusted shop' },
+    de: { viewProducts: 'Produkte Ansehen', from: 'Ab', reviews: 'Was unsere Kunden sagen', trusted: 'Vertrauenswürdiger Shop' },
+    fr: { viewProducts: 'Voir Produits', from: 'À partir de', reviews: 'Ce que disent nos clients', trusted: 'Boutique de confiance' },
+    it: { viewProducts: 'Vedi Prodotti', from: 'Da', reviews: 'Cosa dicono i nostri clienti', trusted: 'Negozio di fiducia' },
+    pt: { viewProducts: 'Ver Produtos', from: 'Desde', reviews: 'O que dizem nossos clientes', trusted: 'Loja de confiança' },
+    nl: { viewProducts: 'Bekijk Producten', from: 'Vanaf', reviews: 'Wat onze klanten zeggen', trusted: 'Betrouwbare winkel' },
+    pl: { viewProducts: 'Zobacz Produkty', from: 'Od', reviews: 'Co mówią nasi klienci', trusted: 'Zaufany sklep' },
+  };
+  const pageTexts = texts[validLocale] || texts.en;
+
   return (
     <main className="min-h-screen bg-background">
-      <Header locale={validLocale} transparent />
+      <Header locale={validLocale} />
       
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center">
-        <div className="absolute inset-0">
-          <Image
-            src={heroImage}
-            alt={pageTitle}
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
-        </div>
-        
-        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-32">
-          <div className="max-w-2xl">
-            {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-white/60 text-sm mb-6">
-              <Link href={`/${validLocale}`} className="hover:text-white transition-colors">
-                {t.nav.home}
-              </Link>
-              <span>/</span>
-              {category && (
-                <>
-                  <Link href={`/${validLocale}/${category}`} className="hover:text-white transition-colors capitalize">
+      {/* Modern Hero Section - Side by side layout */}
+      <section className="pt-20 pb-16 lg:pt-24 lg:pb-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Content */}
+            <div className="order-2 lg:order-1">
+              {/* Breadcrumb */}
+              <nav className="flex items-center gap-2 text-muted-foreground text-sm mb-6">
+                <Link href={`/${validLocale}`} className="hover:text-foreground transition-colors">
+                  {t.nav.home}
+                </Link>
+                <span>/</span>
+                {category && (
+                  <span className="text-foreground capitalize">
                     {catTranslations[category]}
+                  </span>
+                )}
+              </nav>
+              
+              {/* Badge */}
+              <span className="inline-block text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-4">
+                CBD Boutique
+              </span>
+              
+              {/* Title */}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light tracking-tight mb-6">
+                {pageTitle}
+              </h1>
+              
+              {/* Description */}
+              <p className="text-lg text-muted-foreground font-light mb-8 max-w-lg leading-relaxed">
+                {pageDescription}
+              </p>
+              
+              {/* Price indicator */}
+              <div className="mb-8">
+                <span className="text-sm text-muted-foreground">{pageTexts.from}</span>
+                <p className="text-3xl font-light">15€</p>
+              </div>
+              
+              {/* Trust badges */}
+              <div className="flex flex-wrap gap-4 mb-8">
+                {[
+                  { icon: Leaf, text: { es: 'Orgánico', en: 'Organic', de: 'Bio', fr: 'Bio' }[validLocale] || 'Organic' },
+                  { icon: FlaskConical, text: { es: 'Testado', en: 'Lab Tested', de: 'Laborgetestet', fr: 'Testé' }[validLocale] || 'Lab Tested' },
+                  { icon: Truck, text: { es: 'Envío 24h', en: '24h Shipping', de: 'Versand 24h', fr: 'Livraison 24h' }[validLocale] || '24h Shipping' },
+                  { icon: Shield, text: { es: 'Legal', en: 'Legal', de: 'Legal', fr: 'Légal' }[validLocale] || 'Legal' },
+                ].map((badge, i) => (
+                  <div key={i} className="flex items-center gap-2 text-muted-foreground text-sm px-3 py-1.5 bg-muted/50 rounded-full">
+                    <badge.icon className="h-4 w-4" strokeWidth={1.5} />
+                    <span>{badge.text}</span>
+                  </div>
+                ))}
+              </div>
+              
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <ScrollToProductsButton 
+                  text={pageTexts.viewProducts}
+                  className="inline-flex items-center justify-center gap-2 h-14 px-10 bg-foreground text-background text-xs uppercase tracking-[0.2em] font-medium hover:bg-foreground/90 transition-colors cursor-pointer"
+                />
+                <Button variant="outline" size="lg" className="h-14 px-10 text-xs uppercase tracking-[0.2em] font-medium" asChild>
+                  <Link href={`/${validLocale}/contact`}>
+                    {t.nav.contact}
                   </Link>
-                  {city && <span>/</span>}
-                </>
-              )}
-              {city && <span className="text-white">{city.name}</span>}
-            </nav>
-            
-            {/* Title */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-white tracking-tight mb-6">
-              {pageTitle}
-            </h1>
-            
-            {/* Description */}
-            <p className="text-lg text-white/80 font-light mb-8 max-w-xl">
-              {pageDescription}
-            </p>
-            
-            {/* Trust badges - translated for all locales */}
-            <div className="flex flex-wrap gap-4 mb-8">
-              {[
-                { icon: Leaf, text: { es: 'Orgánico', en: 'Organic', de: 'Bio', fr: 'Bio', it: 'Biologico', pt: 'Orgânico', nl: 'Biologisch', pl: 'Organiczny', cs: 'Bio', el: 'Βιολογικό' }[validLocale] || 'Organic' },
-                { icon: FlaskConical, text: { es: 'Testado', en: 'Lab Tested', de: 'Laborgetestet', fr: 'Testé Labo', it: 'Testato', pt: 'Testado', nl: 'Labgetest', pl: 'Testowany', cs: 'Testováno', el: 'Ελεγμένο' }[validLocale] || 'Lab Tested' },
-                { icon: Truck, text: { es: 'Envío 24h', en: '24h Shipping', de: 'Versand 24h', fr: 'Livraison 24h', it: 'Spedizione 24h', pt: 'Envio 24h', nl: 'Verzending 24u', pl: 'Wysyłka 24h', cs: 'Doručení 24h', el: 'Αποστολή 24ω' }[validLocale] || '24h Shipping' },
-                { icon: Shield, text: { es: 'Legal', en: 'Legal', de: 'Legal', fr: 'Légal', it: 'Legale', pt: 'Legal', nl: 'Legaal', pl: 'Legalny', cs: 'Legální', el: 'Νόμιμο' }[validLocale] || 'Legal' },
-              ].map((badge, i) => (
-                <div key={i} className="flex items-center gap-2 text-white/80 text-sm">
-                  <badge.icon className="h-4 w-4" strokeWidth={1.5} />
-                  <span>{badge.text}</span>
-                </div>
-              ))}
+                </Button>
+              </div>
             </div>
             
-            {/* CTA */}
-            <Button size="lg" className="h-14 px-10 text-xs uppercase tracking-[0.2em] font-medium rounded-none" asChild>
-              <Link href={`/${validLocale}/${category || 'cbd-oil'}`}>
-                {t.hero.cta}
-                <ArrowRight className="ml-3 h-4 w-4" />
-              </Link>
-            </Button>
+            {/* Image - Landscape format */}
+            <div className="order-1 lg:order-2">
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted">
+                <Image
+                  src={heroImage}
+                  alt={pageTitle}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <Features locale={validLocale} />
+      {/* Shopify Products - Right after hero */}
+      <ShopifyProducts 
+        locale={validLocale} 
+        collection={category || 'cbd-oil'} 
+        title={category ? catTranslations[category] : 'CBD Products'}
+        limit={8}
+      />
 
-      {/* Product Types Section */}
-      {productTypes.length > 0 && (
-        <section className="py-24 bg-muted/30">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
-                {locale === 'es' ? 'Tipos de Producto' : 'Product Types'}
-              </span>
-              <h2 className="text-3xl lg:text-4xl font-serif font-light tracking-tight">
-                {category ? catTranslations[category] : 'CBD'} {locale === 'es' ? 'Disponibles' : 'Available'}
-              </h2>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {productTypes.map((type) => (
-                <Link
-                  key={type}
-                  href={`/${validLocale}/${category}-${type}`}
-                  className="group p-6 bg-background border border-border/50 hover:border-foreground/20 transition-colors text-center"
-                >
-                  <h3 className="text-sm font-medium capitalize group-hover:text-foreground/80 transition-colors">
-                    {type.replace(/-/g, ' ')}
-                  </h3>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Local SEO Content Section */}
-      {city && (
-        <section className="py-24">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
-                  {locale === 'es' ? `CBD en ${city.name}` : `CBD in ${city.name}`}
-                </span>
-                <h2 className="text-3xl lg:text-4xl font-serif font-light tracking-tight mb-6">
-                  {locale === 'es' 
-                    ? `Tu tienda de CBD de confianza en ${city.name}` 
-                    : `Your trusted CBD shop in ${city.name}`}
-                </h2>
-                <div className="space-y-4 text-muted-foreground font-light">
-                  <p>
-                    {locale === 'es'
-                      ? `Descubre la mejor selección de productos CBD premium en ${city.name}. Ofrecemos envío discreto y rápido a toda la ciudad y alrededores.`
-                      : `Discover the best selection of premium CBD products in ${city.name}. We offer discreet and fast shipping throughout the city and surrounding areas.`}
-                  </p>
-                  <p>
-                    {locale === 'es'
-                      ? `Todos nuestros productos son 100% legales, orgánicos y testados en laboratorios independientes. Garantizamos la máxima calidad y pureza.`
-                      : `All our products are 100% legal, organic and tested in independent laboratories. We guarantee the highest quality and purity.`}
-                  </p>
+      {/* Features Bar */}
+      <section className="py-16 border-y border-border/50">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { title: { es: 'Envío Gratis', en: 'Free Shipping', de: 'Kostenloser Versand', fr: 'Livraison Gratuite' }[validLocale] || 'Free Shipping', desc: { es: 'Pedidos +50€', en: 'Orders +50€', de: 'Bestellungen +50€', fr: 'Commandes +50€' }[validLocale] || 'Orders +50€' },
+              { title: { es: '100% Legal', en: '100% Legal', de: '100% Legal', fr: '100% Légal' }[validLocale] || '100% Legal', desc: { es: 'THC <0.2%', en: 'THC <0.2%', de: 'THC <0.2%', fr: 'THC <0.2%' }[validLocale] || 'THC <0.2%' },
+              { title: { es: 'Lab Tested', en: 'Lab Tested', de: 'Laborgetestet', fr: 'Testé Labo' }[validLocale] || 'Lab Tested', desc: { es: 'Certificado', en: 'Certified', de: 'Zertifiziert', fr: 'Certifié' }[validLocale] || 'Certified' },
+              { title: { es: 'Devoluciones', en: 'Returns', de: 'Rückgabe', fr: 'Retours' }[validLocale] || 'Returns', desc: { es: '30 días', en: '30 days', de: '30 Tage', fr: '30 jours' }[validLocale] || '30 days' },
+            ].map((feature, i) => (
+              <div key={i} className="text-center">
+                <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
+                  <Check className="w-5 h-5 text-foreground" />
                 </div>
-                
-                <ul className="mt-8 space-y-3">
-                  {[
-                    locale === 'es' ? 'Envío discreto en 24-48h' : 'Discreet shipping in 24-48h',
-                    locale === 'es' ? 'Productos certificados y legales' : 'Certified and legal products',
-                    locale === 'es' ? 'Atención al cliente especializada' : 'Specialized customer service',
-                    locale === 'es' ? 'Garantía de satisfacción' : 'Satisfaction guarantee',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3">
-                      <Check className="h-4 w-4 text-foreground/70" strokeWidth={2} />
-                      <span className="text-sm">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-sm font-medium">{feature.title}</p>
+                <p className="text-xs text-muted-foreground mt-1">{feature.desc}</p>
               </div>
-              
-              <div className="relative aspect-square">
-                <Image
-                  src={heroImage}
-                  alt={`CBD ${city.name}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
-      {/* Related Categories */}
+      {/* Reviews Section */}
       <section className="py-24 bg-muted/30">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-serif font-light tracking-tight">
-              {locale === 'es' ? 'Otras Categorías' : 'Other Categories'}
-            </h2>
+          <h2 className="text-3xl font-serif font-light text-center mb-16 tracking-tight">
+            {pageTexts.reviews}
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {(() => {
+              const reviews: Record<string, { text: string; author: string; product: string }[]> = {
+                es: [
+                  { text: 'Excelente calidad del aceite CBD. Me ha ayudado mucho con el estrés y el sueño. Envío rápido y discreto.', author: 'María G.', product: 'Aceite CBD 10%' },
+                  { text: 'Las flores CBD son increíbles. Aroma natural y efecto relajante. Muy recomendable.', author: 'Carlos R.', product: 'Flores CBD Premium' },
+                  { text: 'Servicio al cliente excepcional. Resolvieron todas mis dudas sobre los productos. Volveré a comprar.', author: 'Ana M.', product: 'Cápsulas CBD' },
+                ],
+                en: [
+                  { text: 'Excellent CBD oil quality. It has helped me a lot with stress and sleep. Fast and discreet shipping.', author: 'Mary G.', product: 'CBD Oil 10%' },
+                  { text: 'The CBD flowers are amazing. Natural aroma and relaxing effect. Highly recommended.', author: 'Charles R.', product: 'Premium CBD Flowers' },
+                  { text: 'Exceptional customer service. They answered all my questions about the products. Will buy again.', author: 'Anna M.', product: 'CBD Capsules' },
+                ],
+                de: [
+                  { text: 'Ausgezeichnete CBD-Öl Qualität. Hat mir sehr bei Stress und Schlaf geholfen. Schneller und diskreter Versand.', author: 'Maria G.', product: 'CBD Öl 10%' },
+                  { text: 'Die CBD-Blüten sind erstaunlich. Natürliches Aroma und entspannende Wirkung. Sehr empfehlenswert.', author: 'Karl R.', product: 'Premium CBD Blüten' },
+                  { text: 'Außergewöhnlicher Kundenservice. Sie haben alle meine Fragen beantwortet. Werde wieder kaufen.', author: 'Anna M.', product: 'CBD Kapseln' },
+                ],
+                fr: [
+                  { text: 'Excellente qualité d\'huile CBD. M\'a beaucoup aidé avec le stress et le sommeil. Livraison rapide et discrète.', author: 'Marie G.', product: 'Huile CBD 10%' },
+                  { text: 'Les fleurs CBD sont incroyables. Arôme naturel et effet relaxant. Très recommandé.', author: 'Charles R.', product: 'Fleurs CBD Premium' },
+                  { text: 'Service client exceptionnel. Ils ont répondu à toutes mes questions. J\'achèterai à nouveau.', author: 'Anne M.', product: 'Capsules CBD' },
+                ],
+              };
+              const r = reviews[validLocale] || reviews.en;
+              return r.map((review, i) => (
+                <div key={i} className="bg-background p-8 rounded-xl">
+                  <div className="flex gap-1 mb-4">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">"{review.text}"</p>
+                  <div className="border-t border-border/50 pt-4">
+                    <p className="text-sm font-medium">{review.author}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{review.product}</p>
+                  </div>
+                </div>
+              ));
+            })()}
           </div>
+        </div>
+      </section>
+
+      {/* Related Categories - Horizontal cards */}
+      <section className="py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <h2 className="text-3xl font-serif font-light text-center mb-16 tracking-tight">
+            {locale === 'es' ? 'Otras Categorías' : 'Other Categories'}
+          </h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {relatedCategories.map((cat) => (
               <Link
                 key={cat}
                 href={`/${validLocale}/${cat}`}
-                className="group relative aspect-[3/4] overflow-hidden bg-muted"
+                className="group"
               >
-                <Image
-                  src={categoryImages[cat]}
-                  alt={catTranslations[cat]}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-lg text-white font-serif font-light capitalize">
-                    {catTranslations[cat]}
-                  </h3>
+                <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-muted mb-4">
+                  <Image
+                    src={categoryImages[cat]}
+                    alt={catTranslations[cat]}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
                 </div>
+                <h3 className="text-lg font-medium capitalize group-hover:text-muted-foreground transition-colors">
+                  {catTranslations[cat]}
+                </h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {pageTexts.from} <span className="text-foreground">15€</span>
+                </p>
               </Link>
             ))}
           </div>
