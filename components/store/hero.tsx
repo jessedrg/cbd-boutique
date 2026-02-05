@@ -134,7 +134,7 @@ export function Hero({ locale }: HeroProps) {
       <div className="absolute top-0 left-[90%] w-px h-full bg-primary-foreground/5 hidden lg:block" />
       
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 w-full">
-        <div className="max-w-2xl pt-28 sm:pt-32 lg:pt-32">
+        <div className="max-w-2xl pt-32 sm:pt-36 lg:pt-40">
           {/* Badge */}
           <div className={cn(
             "mb-6 sm:mb-10 flex items-center gap-3 sm:gap-4 transition-all duration-1000 delay-200",
