@@ -35,7 +35,7 @@ const CTA_CONTENT: Record<string, {
     subtitle: "Unete a mas de 50.000 clientes en toda Europa que confian en CBD Boutique para su rutina diaria de bienestar. Cada producto esta respaldado por nuestra garantia de calidad y nuestra promesa de satisfaccion de 30 dias.",
     button: "Ver Mas Vendidos",
     benefits: [
-      "Canamo europeo organico, sin OGM, de granjas certificadas",
+      "Cáñamo europeo orgánico, sin OGM, de granjas certificadas",
       "Pruebas independientes de laboratorio con transparencia total de COA",
       "Envio gratuito con seguimiento en toda Europa en pedidos superiores a 50 EUR",
       "Especialistas en CBD dedicados para orientacion personalizada",
