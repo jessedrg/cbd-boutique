@@ -5,6 +5,9 @@ import { Features } from "@/components/store/features";
 import { Categories } from "@/components/store/categories";
 import { ShopifyProducts } from "@/components/store/shopify-products";
 import { CTA } from "@/components/store/cta";
+import { Testimonials } from "@/components/store/testimonials";
+import { CBDEducation } from "@/components/store/cbd-education";
+import { LocalSEO } from "@/components/store/local-seo";
 import { Footer } from "@/components/store/footer";
 import { TRANSLATIONS, SUPPORTED_LOCALES } from "@/lib/seo-data";
 
@@ -22,12 +25,15 @@ export default function HomePage() {
   
   return (
     <main className="min-h-screen bg-background">
-      <Header locale="en" />
+      <Header locale="en" transparent />
       <Hero locale="en" />
       <Features locale="en" />
       <Categories locale="en" />
       <ShopifyProducts locale="en" title={t.products.title} />
+      <Testimonials locale="en" />
       <CTA locale="en" />
+      <CBDEducation locale="en" />
+      <LocalSEO locale="en" />
       <Footer locale="en" />
     </main>
   );

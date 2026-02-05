@@ -6,6 +6,8 @@ import { Features } from "@/components/store/features";
 import { Categories } from "@/components/store/categories";
 import { ShopifyProducts } from "@/components/store/shopify-products"; // Updated import
 import { CTA } from "@/components/store/cta";
+import { Testimonials } from "@/components/store/testimonials";
+import { CBDEducation } from "@/components/store/cbd-education";
 import { LocalSEO } from "@/components/store/local-seo";
 import { Footer } from "@/components/store/footer";
 import { SUPPORTED_LOCALES, TRANSLATIONS, type Locale } from "@/lib/seo-data";
@@ -82,12 +84,14 @@ const validLocale = locale as Locale;
 
   return (
     <main className="min-h-screen bg-background">
-      <Header locale={validLocale} />
+      <Header locale={validLocale} transparent />
       <Hero locale={validLocale} />
       <Features locale={validLocale} />
       <Categories locale={validLocale} />
       <ShopifyProducts locale={validLocale} title={t.products.title} />
+      <Testimonials locale={validLocale} />
       <CTA locale={validLocale} />
+      <CBDEducation locale={validLocale} />
       <LocalSEO locale={validLocale} />
       <Footer locale={validLocale} />
     </main>
