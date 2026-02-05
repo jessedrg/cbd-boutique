@@ -13,10 +13,10 @@ export function Logo({ className, iconClassName, textClassName, showText = true,
   const textColor = variant === "white" ? "text-white" : "text-foreground";
 
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
+    <span className={cn("inline-flex items-center gap-2", className)}>
       <svg
-        width="32"
-        height="32"
+        width="28"
+        height="28"
         viewBox="0 0 57 57"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +32,7 @@ export function Logo({ className, iconClassName, textClassName, showText = true,
         <path d="M45.7 29.8L48 18.6L49.3 14.9L53.5 13.7L41.1 11.2L38.8 22.4L37.5 26.1L33.3 27.3L45.7 29.8Z" fill={fillColor}/>
       </svg>
       {showText && (
-        <span className={cn("text-lg font-serif font-light tracking-wide", textColor, textClassName)}>
+        <span className={cn("text-base font-serif font-light tracking-wide", textColor, textClassName)}>
           CBD Boutique
         </span>
       )}

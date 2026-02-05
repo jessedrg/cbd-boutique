@@ -118,7 +118,7 @@ const CONTACT_CONTENT: Record<string, {
       subtitle: "Encuentra respuestas a las preguntas mas comunes.",
       items: [
         { q: "Cual es su politica de envio?", a: "Ofrecemos envio discreto gratuito en pedidos superiores a 50 EUR en 27 paises europeos. La entrega estandar tarda 2-4 dias laborables. Entrega express al dia siguiente disponible en Suiza, Alemania, Francia y Benelux por 9.90 EUR adicionales. Todos los paquetes se envian en embalaje discreto sin marcas de CBD visibles." },
-        { q: "Son legales sus productos?", a: "Si. Todos nuestros productos contienen menos del 0.2% de THC y cumplen con las regulaciones de la UE sobre productos de canamo industrial. Nuestros informes de laboratorio estan disponibles publicamente para cada lote." },
+        { q: "Son legales sus productos?", a: "Sí. Todos nuestros productos contienen menos del 0.2% de THC y cumplen con las regulaciones de la UE sobre productos de cáñamo industrial. Nuestros informes de laboratorio están disponibles públicamente para cada lote." },
         { q: "Ofrecen devoluciones?", a: "Ofrecemos garantia de satisfaccion de 30 dias en productos sin abrir. Para productos abiertos, gestionamos devoluciones caso por caso." },
         { q: "Como elijo el producto CBD adecuado?", a: "Depende de tus objetivos, nivel de experiencia y metodo preferido. Nuestros especialistas ofrecen consultas gratuitas. Recomendamos comenzar con un aceite de baja concentracion (5-10%)." },
         { q: "Que metodos de pago aceptan?", a: "Aceptamos Visa, Mastercard, American Express, PayPal, Klarna, SOFORT Banking, iDEAL, Bancontact y transferencia bancaria SEPA. Todas las transacciones son seguras con encriptacion SSL de 256 bits." },

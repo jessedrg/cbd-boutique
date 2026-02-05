@@ -51,13 +51,13 @@ const EDUCATION_CONTENT: Record<string, {
     eyebrow: "Educacion CBD",
     title: "Entendiendo el CBD",
     subtitle: "Todo lo que necesitas saber sobre el cannabidiol y como puede apoyar tu bienestar",
-    intro: "El cannabidiol (CBD) es uno de los mas de 100 cannabinoides que se encuentran de forma natural en la planta Cannabis sativa. A diferencia del THC, el CBD no es psicoactivo y es legal en toda la Union Europea cuando se extrae de canamo industrial con menos del 0.2% de THC. La investigacion sobre el CBD se ha expandido significativamente, con estudios que exploran su potencial para apoyar el bienestar general.",
+    intro: "El cannabidiol (CBD) es uno de los más de 100 cannabinoides que se encuentran de forma natural en la planta Cannabis sativa. A diferencia del THC, el CBD no es psicoactivo y es legal en toda la Unión Europea cuando se extrae de cáñamo industrial con menos del 0.2% de THC. La investigación sobre el CBD se ha expandido significativamente, con estudios que exploran su potencial para apoyar el bienestar general.",
     whatIsCbd: {
       title: "Que es el CBD?",
       text: "El CBD interactua con el sistema endocannabinoide del cuerpo (SEC), una compleja red de senalizacion celular que desempena un papel en la regulacion del sueno, el estado de animo, el apetito, la funcion inmunitaria y la homeostasis. El SEC contiene receptores (CB1 y CB2) distribuidos por todo el cuerpo. La interaccion del CBD con estos receptores es lo que los investigadores creen que contribuye a sus posibles aplicaciones de bienestar."
     },
     benefits: [
-      { icon: "droplets", title: "Extracto Vegetal Natural", desc: "El CBD se extrae de canamo europeo cultivado organicamente usando metodos de CO2 supercritico, preservando el espectro completo de cannabinoides, terpenos y flavonoides beneficiosos." },
+      { icon: "droplets", title: "Extracto Vegetal Natural", desc: "El CBD se extrae de cáñamo europeo cultivado orgánicamente usando métodos de CO2 supercrítico, preservando el espectro completo de cannabinoides, terpenos y flavonoides beneficiosos." },
       { icon: "brain", title: "Sistema Endocannabinoide", desc: "El CBD apoya el sistema endocannabinoide del cuerpo, ayudando a mantener la homeostasis. El SEC regula funciones criticas como los ciclos sueno-vigilia, el estado de animo y la respuesta inmune." },
       { icon: "moon", title: "Rutina Diaria de Bienestar", desc: "Muchos usuarios incorporan el CBD a sus rituales diarios de bienestar, encontrando que el uso consistente apoya una sensacion de calma y equilibrio." },
       { icon: "activity", title: "La Biodisponibilidad Importa", desc: "Los diferentes metodos de consumo ofrecen tasas de biodisponibilidad variables. Los aceites sublinguales se absorben aproximadamente al 20-30%, mientras que las aplicaciones topicas se dirigen a areas especificas." },

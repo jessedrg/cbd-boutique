@@ -36,7 +36,7 @@ const categoryDescriptions: Record<string, Record<Category, string>> = {
   },
   es: {
     'cbd-oil': 'Aceites CBD de espectro completo y amplio con dosificacion precisa. Disponibles en concentraciones del 5% al 30%, extraidos con CO2 para maxima pureza.',
-    'cbd-flowers': 'Flores de canamo premium seleccionadas a mano, cultivadas organicamente en Suiza e Italia. Ricas en terpenos y cannabinoides.',
+    'cbd-flowers': 'Flores de cáñamo premium seleccionadas a mano, cultivadas orgánicamente en Suiza e Italia. Ricas en terpenos y cannabinoides.',
     'cbd-edibles': 'Gominolas, chocolates y miel de CBD artesanales. Cada pieza esta dosificada con precision para un bienestar consistente.',
     'cbd-cosmetics': 'Cosmetica CBD nutritiva formulada con extractos botanicos. Desde serums hasta balsamos, cada producto cuida tu piel.',
     'cbd-vape': 'Cartuchos de vapeo y e-liquidos CBD premium. Formulas de accion rapida con perfiles terpenicos naturales.',

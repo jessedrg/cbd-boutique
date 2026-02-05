@@ -65,10 +65,10 @@ const FEATURE_DATA: Record<string, {
     subtitle: "Hemos construido CBD Boutique sobre cuatro pilares inquebrantables que nos distinguen en el mercado europeo de CBD.",
     features: [
       {
-        title: "Canamo Organico Europeo",
-        shortDesc: "Granjas organicas certificadas por la UE, cero pesticidas",
-        longDesc: "Cada producto proviene de granjas de canamo organico certificadas en Suiza, Italia y los Paises Bajos. Mantenemos relaciones directas con nuestros agricultores, visitando cada granja anualmente.",
-        detail: "Nuestro canamo crece en suelo alpino rico en minerales a elevaciones superiores a 600 metros, donde el aire limpio y la exposicion natural a los UV producen plantas con perfiles excepcionalmente ricos en cannabinoides y terpenos."
+        title: "Cáñamo Orgánico Europeo",
+        shortDesc: "Granjas orgánicas certificadas por la UE, cero pesticidas",
+        longDesc: "Cada producto proviene de granjas de cáñamo orgánico certificadas en Suiza, Italia y los Países Bajos. Mantenemos relaciones directas con nuestros agricultores, visitando cada granja anualmente.",
+        detail: "Nuestro cáñamo crece en suelo alpino rico en minerales a elevaciones superiores a 600 metros, donde el aire limpio y la exposición natural a los UV producen plantas con perfiles excepcionalmente ricos en cannabinoides y terpenos."
       },
       {
         title: "Pruebas Independientes",
@@ -85,7 +85,7 @@ const FEATURE_DATA: Record<string, {
       {
         title: "Guia Experta en CBD",
         shortDesc: "Especialistas certificados, consultas gratuitas",
-        longDesc: "Nuestros especialistas en CBD tienen certificaciones de la Asociacion Europea del Canamo Industrial. Ofrecen consultas gratuitas y personalizadas.",
+        longDesc: "Nuestros especialistas en CBD tienen certificaciones de la Asociación Europea del Cáñamo Industrial. Ofrecen consultas gratuitas y personalizadas.",
         detail: "Cada especialista completa mas de 120 horas de formacion cubriendo ciencia de cannabinoides, el sistema endocannabinoide y coaching de bienestar."
       },
     ],
@@ -93,8 +93,8 @@ const FEATURE_DATA: Record<string, {
     processTitle: "De la semilla a tu puerta",
     processSubtitle: "Un viaje meticuloso que asegura que cada gota y cada flor cumple los mas altos estandares europeos de pureza, potencia y seguridad.",
     steps: [
-      { num: "01", title: "Cultivo Organico", desc: "Nuestras granjas asociadas cultivan variedades de canamo en suelo alpino rico en minerales. Cada planta es cuidada a mano, cosechada en su punto optimo y secada lentamente." },
-      { num: "02", title: "Extraccion CO2", desc: "Instalaciones de extraccion CO2 supercritica de ultima generacion procesan el canamo a temperaturas y presiones controladas con precision. Este metodo de grado farmaceutico produce extractos puros." },
+      { num: "01", title: "Cultivo Orgánico", desc: "Nuestras granjas asociadas cultivan variedades de cáñamo en suelo alpino rico en minerales. Cada planta es cuidada a mano, cosechada en su punto óptimo y secada lentamente." },
+      { num: "02", title: "Extracción CO2", desc: "Instalaciones de extracción CO2 supercrítica de última generación procesan el cáñamo a temperaturas y presiones controladas con precisión. Este método de grado farmacéutico produce extractos puros." },
       { num: "03", title: "Triple Analisis", desc: "Cada lote de extraccion se envia a tres laboratorios independientes para analisis exhaustivo: potencia de cannabinoides, perfil terpenico y deteccion de contaminantes." },
       { num: "04", title: "Formulacion Experta", desc: "Nuestro equipo de farmaceuticos crea productos optimizados para la biodisponibilidad, usando aceite MCT organico y proporciones precisas de cannabinoides." },
     ],

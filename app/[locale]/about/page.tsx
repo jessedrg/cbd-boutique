@@ -82,15 +82,15 @@ const ABOUT_CONTENT: Record<string, {
     mission: {
       eyebrow: "Nuestra Mision",
       title: "Donde la naturaleza se encuentra con la ciencia",
-      text1: "Nuestro viaje comenzo en 2019 cuando nuestros fundadores, apasionados por el bienestar natural y frustrados por la falta de estandares de calidad en la industria del CBD, decidieron crear algo diferente. Viajaron por Europa visitando granjas de canamo, instalaciones de extraccion y laboratorios de investigacion.",
-      text2: "Lo que descubrieron fue notable: el mejor CBD proviene de canamo europeo cultivado organicamente, extraido cuidadosamente con metodos de CO2 supercritico y rigurosamente testado por laboratorios independientes.",
+      text1: "Nuestro viaje comenzó en 2019 cuando nuestros fundadores, apasionados por el bienestar natural y frustrados por la falta de estándares de calidad en la industria del CBD, decidieron crear algo diferente. Viajaron por Europa visitando granjas de cáñamo, instalaciones de extracción y laboratorios de investigación.",
+      text2: "Lo que descubrieron fue notable: el mejor CBD proviene de cáñamo europeo cultivado orgánicamente, extraído cuidadosamente con métodos de CO2 supercrítico y rigurosamente testado por laboratorios independientes.",
       text3: "Hoy trabajamos directamente con una red de granjas organicas certificadas en Suiza, Italia y los Paises Bajos. Cada producto pasa por un minimo de tres pruebas de laboratorio independientes antes de llegar a tus manos."
     },
     values: {
       title: "Nuestros Valores Fundamentales",
       subtitle: "Estos principios guian cada decision que tomamos, desde el abastecimiento hasta el envio.",
       items: [
-        { icon: "leaf", title: "Origenes Organicos", desc: "Utilizamos exclusivamente canamo de granjas organicas certificadas por la UE. Sin pesticidas, sin herbicidas, sin fertilizantes sinteticos. Solo canamo puro cultivado naturalmente." },
+        { icon: "leaf", title: "Orígenes Orgánicos", desc: "Utilizamos exclusivamente cáñamo de granjas orgánicas certificadas por la UE. Sin pesticidas, sin herbicidas, sin fertilizantes sintéticos. Solo cáñamo puro cultivado naturalmente." },
         { icon: "flask", title: "Rigor Cientifico", desc: "Cada lote es analizado por laboratorios independientes acreditados para contenido de cannabinoides, perfil de terpenos, metales pesados, pesticidas y contaminacion microbiana." },
         { icon: "heart", title: "Bienestar Primero", desc: "Formulamos basandonos en las ultimas investigaciones y estudios clinicos. Nuestro equipo incluye farmaceuticos y expertos en bienestar que aseguran la biodisponibilidad optima." },
         { icon: "shield", title: "Transparencia Total", desc: "De la semilla al estante, mantenemos trazabilidad completa. Escanea el codigo QR de cualquier producto para ver su viaje completo." },
@@ -103,8 +103,8 @@ const ABOUT_CONTENT: Record<string, {
       title: "De la semilla a la serenidad",
       subtitle: "Un proceso meticuloso en cuatro etapas asegura que cada producto cumpla nuestros estandares.",
       steps: [
-        { num: "01", title: "Cultivo", desc: "Nuestras granjas asociadas en Suiza e Italia cultivan variedades de canamo organico seleccionadas por su rico contenido de cannabinoides y terpenos." },
-        { num: "02", title: "Extraccion", desc: "Instalaciones de extraccion CO2 supercritica de ultima generacion procesan el canamo cosechado, preservando el espectro completo de compuestos beneficiosos." },
+        { num: "01", title: "Cultivo", desc: "Nuestras granjas asociadas en Suiza e Italia cultivan variedades de cáñamo orgánico seleccionadas por su rico contenido de cannabinoides y terpenos." },
+        { num: "02", title: "Extracción", desc: "Instalaciones de extracción CO2 supercrítica de última generación procesan el cáñamo cosechado, preservando el espectro completo de compuestos beneficiosos." },
         { num: "03", title: "Analisis", desc: "Cada lote de extraccion se somete a pruebas exhaustivas por laboratorios independientes acreditados." },
         { num: "04", title: "Formulacion", desc: "Nuestro equipo de farmaceuticos y expertos crea productos optimizados para la biodisponibilidad." }
       ]

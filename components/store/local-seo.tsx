@@ -38,7 +38,7 @@ const SEO_CONTENT: Record<string, {
   es: {
     title: "Productos CBD Premium en Europa",
     subtitle: "Tu Fuente de Confianza para Cannabidiol Organico y Testado en Laboratorio",
-    body: "CBD Boutique es un minorista europeo lider especializado en productos CBD premium procedentes de granjas de canamo organico certificadas en Suiza, Italia y los Paises Bajos. Desde nuestra fundacion en 2019, hemos atendido a mas de 50.000 clientes en 27 paises europeos. Nuestra amplia gama incluye aceites CBD de espectro completo y amplio en concentraciones del 5% al 30%, flores CBD premium seleccionadas a mano cultivadas en los Alpes suizos, comestibles CBD artesanales como gominolas y chocolates, cosmetica infusionada con CBD, productos CBD para mascotas y cristales de aislado de CBD puro.",
+    body: "CBD Boutique es un minorista europeo líder especializado en productos CBD premium procedentes de granjas de cáñamo orgánico certificadas en Suiza, Italia y los Países Bajos. Desde nuestra fundación en 2019, hemos atendido a más de 50.000 clientes en 27 países europeos. Nuestra amplia gama incluye aceites CBD de espectro completo y amplio en concentraciones del 5% al 30%, flores CBD premium seleccionadas a mano cultivadas en los Alpes suizos, comestibles CBD artesanales como gominolas y chocolates, cosmética infusionada con CBD, productos CBD para mascotas y cristales de aislado de CBD puro.",
     bodyExtra: "Cada producto pasa por un riguroso protocolo de triple testado: analisis HPLC para cuantificacion de cannabinoides, GC-MS para perfilado terpenico e ICP-MS para deteccion de metales pesados. Publicamos Certificados de Analisis completos para cada lote, accesibles mediante codigos QR en nuestro embalaje.",
     shipping: {
       title: "Envio Rapido y Discreto en Europa",
@@ -46,7 +46,7 @@ const SEO_CONTENT: Record<string, {
     },
     quality: {
       title: "CBD Organico Conforme a la UE",
-      text: "Todos los productos de CBD Boutique cumplen con las regulaciones de la Union Europea, conteniendo menos del 0.2% de THC. Nuestro canamo se cultiva sin pesticidas en granjas organicas certificadas. Usamos extraccion CO2 supercritica para producir extractos puros."
+      text: "Todos los productos de CBD Boutique cumplen con las regulaciones de la Unión Europea, conteniendo menos del 0.2% de THC. Nuestro cáñamo se cultiva sin pesticidas en granjas orgánicas certificadas. Usamos extracción CO2 supercrítica para producir extractos puros."
     },
     legal: {
       title: "CBD Legal en Toda Europa",

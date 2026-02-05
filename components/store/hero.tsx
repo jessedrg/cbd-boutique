@@ -44,7 +44,7 @@ const HERO_CONTENT: Record<string, {
     rotatingWords: ["wellness", "balance", "serenity", "vitality", "harmony"],
   },
   es: {
-    badge: "Canamo Organico Europeo",
+    badge: "Cáñamo Orgánico Europeo",
     titleLine1: "CBD Premium",
     titleLine2: "para el bienestar moderno",
     subtitle: "Descubre nuestra coleccion curada de productos CBD organicos, testados por laboratorios independientes. Desde aceites de espectro completo hasta comestibles artesanales, cada producto proviene de granjas europeas certificadas.",
