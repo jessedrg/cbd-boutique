@@ -277,8 +277,8 @@ export default async function AboutPage({ params }: PageProps) {
       <section className="relative min-h-[70vh] flex items-center justify-center">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1617101815102-e5728e6685fc?w=1920&h=1080&fit=crop"
-            alt="Organic hemp field in European countryside"
+            src="/images/about-hero.jpg"
+            alt="Organic hemp field in the Swiss Alps at golden hour"
             fill
             className="object-cover"
             priority
@@ -323,8 +323,8 @@ export default async function AboutPage({ params }: PageProps) {
             </div>
             <div className="relative aspect-[4/5] overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=800&h=1000&fit=crop"
-                alt="Premium CBD oil extraction process"
+                src="/images/about-mission.jpg"
+                alt="Premium CBD oil extraction in a modern laboratory"
                 fill
                 className="object-cover"
               />

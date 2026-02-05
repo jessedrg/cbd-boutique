@@ -77,8 +77,8 @@ export function Hero({ locale }: HeroProps) {
       {/* Background image */}
       <div className="absolute inset-0">
         <Image 
-          src="https://images.unsplash.com/photo-1611070960720-61fe2fdc5d3c?q=80&w=2070&auto=format&fit=crop" 
-          alt="CBD botanical products on natural background" 
+          src="/images/hero-cbd.jpg" 
+          alt="Premium CBD oil bottles and organic hemp botanicals arranged on natural stone" 
           fill 
           className="object-cover" 
           priority 

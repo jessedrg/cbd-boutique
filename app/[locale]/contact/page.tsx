@@ -350,8 +350,8 @@ export default function ContactPage() {
       {/* Map/Image Section */}
       <section className="relative h-[400px] lg:h-[500px]">
         <Image
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=800&fit=crop"
-          alt="Office"
+          src="/images/contact-office.jpg"
+          alt="CBD Boutique storefront in Zurich"
           fill
           className="object-cover"
         />
