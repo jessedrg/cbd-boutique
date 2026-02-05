@@ -9,7 +9,6 @@ interface ProductGridProps {
   locale: Locale
 }
 
-// Format price with currency
 function formatPrice(amount: string, currencyCode: string): string {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -18,10 +17,8 @@ function formatPrice(amount: string, currencyCode: string): string {
 }
 
 export async function ProductGrid({ products, locale }: ProductGridProps) {
-  // Translate all products in parallel (with caching)
   const translatedProducts = await Promise.all(
     products.map(async (product) => {
-      // Only translate if not English
       if (locale === 'en') {
         return {
           ...product,
@@ -49,7 +46,7 @@ export async function ProductGrid({ products, locale }: ProductGridProps) {
   )
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
       {translatedProducts.map((product) => {
         const imageUrl = product.images?.edges?.[0]?.node?.url
         const price = product.priceRange?.minVariantPrice
@@ -62,51 +59,54 @@ export async function ProductGrid({ products, locale }: ProductGridProps) {
             href={`/${locale}/product/${product.handle}`}
             className="group cursor-pointer"
           >
-            <div className="aspect-square bg-muted rounded-lg sm:rounded-xl mb-2 sm:mb-3 overflow-hidden relative group-hover:bg-muted/80 transition-colors">
+            {/* Product Image */}
+            <div className="aspect-[3/4] bg-secondary mb-2 sm:mb-4 overflow-hidden relative">
               {imageUrl ? (
                 <Image
                   src={imageUrl || "/placeholder.svg"}
                   alt={product.translatedTitle}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="object-cover transition-all duration-700 group-hover:scale-105"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
               ) : (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-12 w-12 sm:h-16 sm:w-16 rounded-full bg-background/80 flex items-center justify-center">
-                    <svg className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                      <rect x="3" y="3" width="18" height="18" rx="2" />
-                      <circle cx="8.5" cy="8.5" r="1.5" />
-                      <path d="M21 15l-5-5L5 21" />
-                    </svg>
-                  </div>
+                <div className="absolute inset-0 flex items-center justify-center bg-secondary">
+                  <svg className="h-10 w-10 text-muted-foreground/30" viewBox="0 0 57 57" fill="currentColor">
+                    <path d="M40 16.3L32.7 7.4L30.7 4.1L32.3 0L22.6 8.2L29.9 17L31.9 20.3L30.3 24.4L40 16.3Z"/>
+                    <path d="M25.9 12.3L14.5 12.5L10.7 12L8.60001 8.2L8.89999 20.9L20.3 20.7L24.1 21.2L26.2 25L25.9 12.3Z"/>
+                    <path d="M14 20.9L7.10001 30L4.39999 32.8L0 32.1L10.1 39.7L17 30.6L19.7 27.9L24.1 28.6L14 20.9Z"/>
+                  </svg>
                 </div>
               )}
               {hasDiscount && (
-                <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded">
+                <span className="absolute top-3 left-3 bg-foreground text-background text-[10px] uppercase tracking-wider px-3 py-1 font-medium">
                   Sale
                 </span>
               )}
             </div>
-            <h3 className="text-xs sm:text-sm font-medium truncate group-hover:text-accent transition-colors">
-              {product.translatedTitle}
-            </h3>
-            {product.translatedProductType && (
-              <p className="text-xs text-muted-foreground/70 truncate">
-                {product.translatedProductType}
-              </p>
-            )}
-            <div className="flex items-center gap-2">
-              {price && (
-                <p className="text-xs sm:text-sm text-foreground font-medium">
-                  {formatPrice(price.amount, price.currencyCode)}
+
+            {/* Product Info */}
+            <div className="space-y-1.5">
+              {product.translatedProductType && (
+                <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground font-light">
+                  {product.translatedProductType}
                 </p>
               )}
-              {hasDiscount && comparePrice && (
-                <p className="text-xs text-muted-foreground line-through">
-                  {formatPrice(comparePrice.amount, comparePrice.currencyCode)}
-                </p>
-              )}
+              <h3 className="text-sm font-light leading-snug group-hover:text-primary transition-colors">
+                {product.translatedTitle}
+              </h3>
+              <div className="flex items-center gap-2">
+                {price && (
+                  <p className="text-sm font-medium">
+                    {formatPrice(price.amount, price.currencyCode)}
+                  </p>
+                )}
+                {hasDiscount && comparePrice && (
+                  <p className="text-xs text-muted-foreground line-through">
+                    {formatPrice(comparePrice.amount, comparePrice.currencyCode)}
+                  </p>
+                )}
+              </div>
             </div>
           </Link>
         )

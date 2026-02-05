@@ -140,7 +140,7 @@ export default async function ProductPage({ params }: PageProps) {
       <div className="flex min-h-screen flex-col bg-background">
         <Header locale={validLocale} />
 
-        <main className="flex-1 pt-16 lg:pt-20">
+        <main className="flex-1 pt-28 lg:pt-32">
           {/* Product Section */}
           <section className="py-8 lg:py-16">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
