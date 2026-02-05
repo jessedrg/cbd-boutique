@@ -123,7 +123,7 @@ export function Footer({ locale }: FooterProps) {
     <footer className="border-t border-border/30 bg-background">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Main footer grid */}
-        <div className="py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+        <div className="py-10 sm:py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-8">
           
           {/* Brand column */}
           <div className="lg:col-span-4">

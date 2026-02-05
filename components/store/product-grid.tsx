@@ -60,7 +60,7 @@ export async function ProductGrid({ products, locale }: ProductGridProps) {
             className="group cursor-pointer"
           >
             {/* Product Image */}
-            <div className="aspect-[3/4] bg-secondary mb-4 overflow-hidden relative">
+            <div className="aspect-[3/4] bg-secondary mb-2 sm:mb-4 overflow-hidden relative">
               {imageUrl ? (
                 <Image
                   src={imageUrl || "/placeholder.svg"}

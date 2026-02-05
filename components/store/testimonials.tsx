@@ -231,17 +231,17 @@ export function Testimonials({ locale }: TestimonialsProps) {
   const review = reviews[activeIndex];
 
   return (
-    <section className="py-24 lg:py-32 bg-secondary/30">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="py-16 sm:py-24 lg:py-32 bg-secondary/30">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-16 lg:mb-20">
-          <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground mb-4 block">
+        <div className="text-center mb-10 sm:mb-16 lg:mb-20">
+          <span className="text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.4em] text-muted-foreground mb-3 sm:mb-4 block">
             {header.eyebrow}
           </span>
-          <h2 className="text-3xl lg:text-5xl font-serif font-light tracking-tight mb-6 text-balance">
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-serif font-light tracking-tight mb-4 sm:mb-6 text-balance">
             {header.title}
           </h2>
-          <p className="text-muted-foreground font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-muted-foreground font-light max-w-2xl mx-auto leading-relaxed">
             {header.subtitle}
           </p>
         </div>
@@ -254,7 +254,7 @@ export function Testimonials({ locale }: TestimonialsProps) {
           )}>
             <div className="text-center mb-10">
               <Quote className="h-8 w-8 text-primary/30 mx-auto mb-8" strokeWidth={1} />
-              <blockquote className="text-lg md:text-xl lg:text-2xl font-serif font-light leading-relaxed text-foreground/80 mb-8">
+              <blockquote className="text-base sm:text-lg md:text-xl lg:text-2xl font-serif font-light leading-relaxed text-foreground/80 mb-6 sm:mb-8">
                 &ldquo;{review.text}&rdquo;
               </blockquote>
               <div className="flex items-center justify-center gap-1 mb-4">

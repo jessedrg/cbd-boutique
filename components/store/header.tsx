@@ -97,7 +97,7 @@ export function Header({ locale, transparent = false }: HeaderProps) {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-14 sm:h-16 items-center justify-between">
           {/* Logo */}
           <Link href={`/${locale === 'en' ? '' : locale}`} className="flex items-center gap-3">
             <Logo variant={isTransparent ? "white" : "default"} />

@@ -189,14 +189,14 @@ export function Features({ locale }: FeaturesProps) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 lg:py-32 bg-background">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="py-16 sm:py-24 lg:py-32 bg-background">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-16 lg:mb-20 max-w-3xl mx-auto">
+        <div className="text-center mb-10 sm:mb-16 lg:mb-20 max-w-3xl mx-auto">
           <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground mb-4 block">
             {data.eyebrow}
           </span>
-          <h2 className="text-3xl lg:text-4xl font-serif font-light tracking-tight mb-6 text-balance">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-light tracking-tight mb-4 sm:mb-6 text-balance">
             {data.title}
           </h2>
           <p className="text-muted-foreground font-light leading-relaxed">
@@ -216,10 +216,10 @@ export function Features({ locale }: FeaturesProps) {
               >
                 <button
                   onClick={() => setExpandedIndex(isExpanded ? null : index)}
-                  className="w-full py-8 flex items-center gap-6 text-left group cursor-pointer"
+                  className="w-full py-5 sm:py-8 flex items-center gap-4 sm:gap-6 text-left group cursor-pointer"
                 >
                   <div className={cn(
-                    "w-14 h-14 border flex items-center justify-center flex-shrink-0 transition-all duration-300",
+                    "w-10 h-10 sm:w-14 sm:h-14 border flex items-center justify-center flex-shrink-0 transition-all duration-300",
                     isExpanded ? "bg-primary border-primary" : "border-border bg-secondary group-hover:border-primary/50"
                   )}>
                     <Icon className={cn(
@@ -240,7 +240,7 @@ export function Features({ locale }: FeaturesProps) {
                   "overflow-hidden transition-all duration-500",
                   isExpanded ? "max-h-96 pb-8" : "max-h-0"
                 )}>
-                  <div className="pl-20 pr-8 space-y-4">
+                  <div className="pl-4 sm:pl-20 pr-4 sm:pr-8 space-y-4">
                     <p className="text-muted-foreground font-light leading-relaxed">{feature.longDesc}</p>
                     <p className="text-sm text-muted-foreground/70 font-light leading-relaxed">{feature.detail}</p>
                   </div>

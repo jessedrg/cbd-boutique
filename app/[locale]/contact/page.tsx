@@ -258,23 +258,23 @@ export default function ContactPage() {
       <Header locale={locale} />
       
       {/* Hero */}
-      <section className="pt-36 pb-16 lg:pt-44 lg:pb-24">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground mb-6 block">{content.hero.eyebrow}</span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light tracking-tight mb-6">{content.hero.title}</h1>
-          <p className="text-lg text-muted-foreground font-light max-w-2xl mx-auto mb-4 leading-relaxed">{content.hero.subtitle}</p>
-          <p className="text-sm text-muted-foreground/60 font-light max-w-xl mx-auto leading-relaxed">{content.hero.intro}</p>
+      <section className="pt-28 sm:pt-36 pb-10 sm:pb-16 lg:pt-44 lg:pb-24">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <span className="text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.4em] text-muted-foreground mb-4 sm:mb-6 block">{content.hero.eyebrow}</span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light tracking-tight mb-4 sm:mb-6">{content.hero.title}</h1>
+          <p className="text-sm sm:text-lg text-muted-foreground font-light max-w-2xl mx-auto mb-3 sm:mb-4 leading-relaxed">{content.hero.subtitle}</p>
+          <p className="text-xs sm:text-sm text-muted-foreground/60 font-light max-w-xl mx-auto leading-relaxed">{content.hero.intro}</p>
         </div>
       </section>
 
       {/* Trust Badges */}
-      <section className="pb-16 lg:pb-20">
-        <div className="mx-auto max-w-5xl px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <section className="pb-10 sm:pb-16 lg:pb-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
             {content.trust.items.map((item, i) => {
               const Icon = getTrustIcon(item.icon);
               return (
-                <div key={i} className="text-center p-6 bg-secondary/40">
+                <div key={i} className="text-center p-3 sm:p-6 bg-secondary/40">
                   <Icon className="h-6 w-6 mx-auto mb-3 text-primary" strokeWidth={1.5} />
                   <h3 className="text-xs uppercase tracking-wider font-medium mb-1.5">{item.title}</h3>
                   <p className="text-[11px] text-muted-foreground font-light leading-relaxed">{item.desc}</p>
@@ -286,9 +286,9 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Grid */}
-      <section className="pb-24 lg:pb-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+      <section className="pb-16 sm:pb-24 lg:pb-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-24">
             {/* Form */}
             <div>
               <h2 className="text-2xl font-serif font-light mb-2">{content.form.title}</h2>
@@ -348,14 +348,14 @@ export default function ContactPage() {
               <h2 className="text-2xl font-serif font-light mb-2">{content.info.title}</h2>
               <p className="text-sm text-muted-foreground font-light mb-8">{content.info.subtitle}</p>
               
-              <div className="space-y-8 mb-12">
+              <div className="space-y-6 sm:space-y-8 mb-8 sm:mb-12">
                 {[
                   { icon: Mail, ...content.info.email, href: `mailto:${content.info.email.value}` },
                   { icon: Phone, ...content.info.phone, href: `tel:${content.info.phone.value}` },
                   { icon: MapPin, label: content.info.address.label, value: content.info.address.value, desc: content.info.address.desc, href: undefined },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-5">
-                    <div className="w-12 h-12 border border-border/50 flex items-center justify-center flex-shrink-0">
+                  <div key={i} className="flex items-start gap-3 sm:gap-5">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 border border-border/50 flex items-center justify-center flex-shrink-0">
                       <item.icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
                     </div>
                     <div>
@@ -389,10 +389,10 @@ export default function ContactPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 lg:py-32 bg-secondary/30">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-serif font-light tracking-tight mb-4">{content.faq.title}</h2>
+      <section className="py-16 sm:py-24 lg:py-32 bg-secondary/30">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-light tracking-tight mb-4">{content.faq.title}</h2>
             <p className="text-muted-foreground font-light max-w-2xl mx-auto">{content.faq.subtitle}</p>
           </div>
           <div className="space-y-0">
@@ -413,7 +413,7 @@ export default function ContactPage() {
       </section>
 
       {/* Image */}
-      <section className="relative h-[400px] lg:h-[500px]">
+      <section className="relative h-[250px] sm:h-[400px] lg:h-[500px]">
         <Image src="/images/contact-office.jpg" alt="CBD Boutique storefront in Zurich" fill className="object-cover" />
         <div className="absolute inset-0 bg-foreground/30" />
       </section>

@@ -149,14 +149,14 @@ export function CBDEducation({ locale }: CBDEducationProps) {
   const content = EDUCATION_CONTENT[locale] || EDUCATION_CONTENT.en;
 
   return (
-    <section className="py-24 lg:py-32 bg-background">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="py-16 sm:py-24 lg:py-32 bg-background">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-16 lg:mb-20 max-w-3xl mx-auto">
-          <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground mb-4 block">
+        <div className="text-center mb-10 sm:mb-16 lg:mb-20 max-w-3xl mx-auto">
+          <span className="text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.4em] text-muted-foreground mb-3 sm:mb-4 block">
             {content.eyebrow}
           </span>
-          <h2 className="text-3xl lg:text-5xl font-serif font-light tracking-tight mb-6 text-balance">
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-serif font-light tracking-tight mb-4 sm:mb-6 text-balance">
             {content.title}
           </h2>
           <p className="text-muted-foreground font-light leading-relaxed mb-6">
@@ -196,7 +196,7 @@ export function CBDEducation({ locale }: CBDEducationProps) {
         </div>
 
         {/* Spectrum types */}
-        <div className="bg-secondary/50 p-10 lg:p-16 mb-20">
+        <div className="bg-secondary/50 p-5 sm:p-10 lg:p-16 mb-12 sm:mb-20">
           <div className="text-center mb-12">
             <h3 className="text-2xl lg:text-3xl font-serif font-light tracking-tight mb-3">{content.spectrumTitle}</h3>
             <p className="text-sm text-muted-foreground font-light">{content.spectrumSubtitle}</p>

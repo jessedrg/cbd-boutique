@@ -81,10 +81,10 @@ export function Categories({ locale }: CategoriesProps) {
   const otherCategories = CATEGORIES.slice(4);
 
   return (
-    <section id="collections" className="py-24 lg:py-32">
+    <section id="collections" className="py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-8 sm:mb-16">
           <div className="max-w-2xl">
             <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground mb-4 block">
               {locale === 'es' ? 'Nuestra Coleccion' : locale === 'de' ? 'Unsere Kollektion' : locale === 'fr' ? 'Notre Collection' : 'Our Collection'}
@@ -109,7 +109,7 @@ export function Categories({ locale }: CategoriesProps) {
         </div>
 
         {/* Featured Categories - Large Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-3 sm:mb-5">
           {featuredCategories.map((category) => (
             <Link 
               key={category} 
@@ -126,8 +126,8 @@ export function Categories({ locale }: CategoriesProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
               
               {/* Content */}
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="text-lg text-primary-foreground font-serif font-light mb-2 capitalize">
+              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6">
+                <h3 className="text-sm sm:text-lg text-primary-foreground font-serif font-light mb-1 sm:mb-2 capitalize">
                   {catTranslations[category]}
                 </h3>
                 <p className="text-xs text-primary-foreground/60 font-light leading-relaxed line-clamp-2">
@@ -144,7 +144,7 @@ export function Categories({ locale }: CategoriesProps) {
         </div>
 
         {/* Other Categories - Smaller Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
           {otherCategories.map((category) => (
             <Link 
               key={category} 

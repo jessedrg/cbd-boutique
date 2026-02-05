@@ -274,7 +274,7 @@ export default async function AboutPage({ params }: PageProps) {
       <Header locale={validLocale} transparent />
       
       {/* Hero */}
-      <section className="relative min-h-[70vh] flex items-center justify-center">
+      <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center">
         <div className="absolute inset-0">
           <Image
             src="/images/about-hero.jpg"
@@ -285,28 +285,28 @@ export default async function AboutPage({ params }: PageProps) {
           />
           <div className="absolute inset-0 bg-foreground/50" />
         </div>
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-32 lg:pt-36">
-          <span className="text-[10px] uppercase tracking-[0.4em] text-primary-foreground/70 mb-6 block">
+        <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto pt-24 sm:pt-32 lg:pt-36">
+          <span className="text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.4em] text-primary-foreground/70 mb-4 sm:mb-6 block">
             {content.hero.eyebrow}
           </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light tracking-tight mb-8 leading-tight text-primary-foreground">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light tracking-tight mb-5 sm:mb-8 leading-tight text-primary-foreground">
             {content.hero.title}
           </h1>
-          <p className="text-lg md:text-xl text-primary-foreground/70 font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-lg md:text-xl text-primary-foreground/70 font-light max-w-2xl mx-auto leading-relaxed">
             {content.hero.subtitle}
           </p>
         </div>
       </section>
 
       {/* Mission */}
-      <section className="py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+      <section className="py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-24 items-start">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-6 block">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-4 sm:mb-6 block">
                 {content.mission.eyebrow}
               </span>
-              <h2 className="text-3xl lg:text-4xl font-serif font-light tracking-tight mb-8">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-light tracking-tight mb-5 sm:mb-8">
                 {content.mission.title}
               </h2>
               <div className="space-y-6">
@@ -334,20 +334,20 @@ export default async function AboutPage({ params }: PageProps) {
       </section>
 
       {/* Values */}
-      <section className="py-24 lg:py-32 bg-secondary/50">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16 max-w-2xl mx-auto">
-            <h2 className="text-3xl lg:text-4xl font-serif font-light tracking-tight mb-4">
+      <section className="py-16 sm:py-24 lg:py-32 bg-secondary/50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 sm:mb-16 max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-light tracking-tight mb-4">
               {content.values.title}
             </h2>
             <p className="text-muted-foreground font-light leading-relaxed">{content.values.subtitle}</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
             {content.values.items.map((value, index) => {
               const IconComponent = getIcon(value.icon);
               return (
                 <article key={index} className="text-center">
-                  <div className="inline-flex items-center justify-center w-14 h-14 mb-6 border border-border bg-background">
+                  <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 mb-4 sm:mb-6 border border-border bg-background">
                     <IconComponent className="h-6 w-6 text-primary" strokeWidth={1.5} />
                   </div>
                   <h3 className="text-sm uppercase tracking-[0.15em] font-medium mb-3">
@@ -364,21 +364,21 @@ export default async function AboutPage({ params }: PageProps) {
       </section>
 
       {/* Process */}
-      <section className="py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-16 max-w-2xl mx-auto">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
+      <section className="py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 sm:mb-16 max-w-2xl mx-auto">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-3 sm:mb-4 block">
               {content.process.eyebrow}
             </span>
-            <h2 className="text-3xl lg:text-4xl font-serif font-light tracking-tight mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-light tracking-tight mb-4">
               {content.process.title}
             </h2>
             <p className="text-muted-foreground font-light leading-relaxed">{content.process.subtitle}</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10 lg:gap-8">
             {content.process.steps.map((step, index) => (
               <article key={index} className="relative">
-                <div className="text-5xl font-serif font-light text-primary/20 mb-4">
+                <div className="text-3xl sm:text-5xl font-serif font-light text-primary/20 mb-3 sm:mb-4">
                   {step.num}
                 </div>
                 <h3 className="text-sm uppercase tracking-[0.15em] font-medium mb-3">
@@ -394,23 +394,23 @@ export default async function AboutPage({ params }: PageProps) {
       </section>
 
       {/* Quality Commitment */}
-      <section className="py-24 lg:py-32 bg-primary text-primary-foreground">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-primary-foreground/60 mb-6 block">
+      <section className="py-16 sm:py-24 lg:py-32 bg-primary text-primary-foreground">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-16">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-primary-foreground/60 mb-4 sm:mb-6 block">
               {content.quality.eyebrow}
             </span>
-            <h2 className="text-3xl lg:text-5xl font-serif font-light tracking-tight mb-8">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-serif font-light tracking-tight mb-5 sm:mb-8">
               {content.quality.title}
             </h2>
-            <p className="text-lg text-primary-foreground/70 font-light leading-relaxed">
+            <p className="text-sm sm:text-lg text-primary-foreground/70 font-light leading-relaxed">
               {content.quality.text}
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 max-w-3xl mx-auto">
             {content.quality.stats.map((stat, i) => (
               <div key={i} className="text-center">
-                <p className="text-3xl lg:text-4xl font-serif font-light mb-2">{stat.value}</p>
+                <p className="text-2xl sm:text-3xl lg:text-4xl font-serif font-light mb-1 sm:mb-2">{stat.value}</p>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-primary-foreground/50">{stat.label}</p>
               </div>
             ))}
@@ -419,18 +419,18 @@ export default async function AboutPage({ params }: PageProps) {
       </section>
 
       {/* CTA */}
-      <section className="py-24 lg:py-32">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <Logo className="justify-center mb-8" />
-          <h2 className="text-3xl lg:text-4xl font-serif font-light tracking-tight mb-4">
+      <section className="py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <Logo className="justify-center mb-6 sm:mb-8" />
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-light tracking-tight mb-4">
             {content.cta.title}
           </h2>
-          <p className="text-muted-foreground mb-10 font-light max-w-xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-muted-foreground mb-8 sm:mb-10 font-light max-w-xl mx-auto leading-relaxed">
             {content.cta.subtitle}
           </p>
           <Link 
             href={`/${locale}/cbd-oil`}
-            className="inline-flex items-center justify-center h-14 px-12 bg-primary text-primary-foreground text-xs uppercase tracking-[0.2em] font-medium hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center justify-center h-12 sm:h-14 px-8 sm:px-12 bg-primary text-primary-foreground text-[10px] sm:text-xs uppercase tracking-[0.2em] font-medium hover:bg-primary/90 transition-colors"
           >
             {content.cta.button}
           </Link>

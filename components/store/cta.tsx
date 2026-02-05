@@ -75,9 +75,9 @@ export function CTA({ locale }: CTAProps) {
   const content = CTA_CONTENT[locale] || CTA_CONTENT.en;
 
   return (
-    <section className="py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="relative bg-primary text-primary-foreground p-12 lg:p-20 overflow-hidden">
+    <section className="py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative bg-primary text-primary-foreground p-6 sm:p-12 lg:p-20 overflow-hidden">
           {/* Decorative element */}
           <div className="absolute top-0 right-0 w-1/3 h-full opacity-5">
             <svg viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
@@ -91,20 +91,20 @@ export function CTA({ locale }: CTAProps) {
             </svg>
           </div>
 
-          <div className="relative grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="relative grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
             <div className="space-y-8">
               <span className="text-[10px] uppercase tracking-[0.3em] text-primary-foreground/60">
                 {content.eyebrow}
               </span>
-              <h2 className="text-3xl lg:text-5xl font-serif font-light tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-serif font-light tracking-tight leading-tight">
                 {content.title}
               </h2>
-              <p className="text-primary-foreground/60 text-base lg:text-lg max-w-md font-light leading-relaxed">
+              <p className="text-primary-foreground/60 text-sm sm:text-base lg:text-lg max-w-md font-light leading-relaxed">
                 {content.subtitle}
               </p>
               <Button 
                 size="lg" 
-                className="h-14 px-10 text-xs uppercase tracking-[0.2em] font-medium bg-primary-foreground text-primary hover:bg-primary-foreground/90 rounded-none" 
+                className="h-12 sm:h-14 px-6 sm:px-10 text-[10px] sm:text-xs uppercase tracking-[0.2em] font-medium bg-primary-foreground text-primary hover:bg-primary-foreground/90 rounded-none" 
                 asChild
               >
                 <Link href={`/${locale === 'en' ? '' : locale + '/'}cbd-oil`}>

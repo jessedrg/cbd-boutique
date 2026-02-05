@@ -91,7 +91,6 @@ const HERO_CONTENT: Record<string, {
 };
 
 export function Hero({ locale }: HeroProps) {
-  const t = TRANSLATIONS[locale] || TRANSLATIONS.en;
   const content = HERO_CONTENT[locale] || HERO_CONTENT.en;
   const [currentWord, setCurrentWord] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -115,8 +114,8 @@ export function Hero({ locale }: HeroProps) {
   }, [rotateWord]);
 
   return (
-    <section className="relative min-h-[100svh] flex items-center overflow-hidden">
-      {/* Background image with parallax feel */}
+    <section className="relative h-[100svh] min-h-[600px] max-h-[1200px] flex items-center overflow-hidden">
+      {/* Background image */}
       <div className="absolute inset-0">
         <Image 
           src="/images/hero-cbd.jpg" 
@@ -130,37 +129,39 @@ export function Hero({ locale }: HeroProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-foreground/20" />
       </div>
 
-      {/* Subtle vertical line decoration */}
+      {/* Decorative lines - hidden on mobile */}
       <div className="absolute top-0 left-[10%] w-px h-full bg-primary-foreground/5 hidden lg:block" />
       <div className="absolute top-0 left-[90%] w-px h-full bg-primary-foreground/5 hidden lg:block" />
       
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-32 w-full">
-        <div className="max-w-2xl">
-          {/* Badge with animated line */}
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 w-full">
+        <div className="max-w-2xl pt-20 sm:pt-24 lg:pt-0">
+          {/* Badge */}
           <div className={cn(
-            "mb-10 flex items-center gap-4 transition-all duration-1000 delay-200",
+            "mb-6 sm:mb-10 flex items-center gap-3 sm:gap-4 transition-all duration-1000 delay-200",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           )}>
-            <div className="h-px w-12 bg-primary-foreground/30" />
-            <span className="text-[10px] uppercase tracking-[0.4em] text-primary-foreground/60 font-medium">
+            <div className="h-px w-8 sm:w-12 bg-primary-foreground/30" />
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.4em] text-primary-foreground/60 font-medium">
               {content.badge}
             </span>
           </div>
 
-          {/* Title with staggered animation */}
+          {/* Title */}
           <h1 className={cn(
-            "font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[0.9] mb-4 text-primary-foreground transition-all duration-1000 delay-300",
+            "font-serif text-[2.5rem] sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[0.9] mb-3 sm:mb-4 text-primary-foreground transition-all duration-1000 delay-300",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           )}>
             <span className="block">{content.titleLine1}</span>
           </h1>
 
-          {/* Rotating word subtitle */}
+          {/* Rotating word */}
           <div className={cn(
-            "font-serif text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-light tracking-tight mb-10 transition-all duration-1000 delay-500",
+            "font-serif text-xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-tight mb-6 sm:mb-10 transition-all duration-1000 delay-500",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           )}>
-            <span className="text-primary-foreground/50">{locale === 'es' ? 'para tu ' : locale === 'de' ? 'fur Ihr ' : locale === 'fr' ? 'pour votre ' : 'for your '}</span>
+            <span className="text-primary-foreground/50">
+              {locale === 'es' ? 'para tu ' : locale === 'de' ? 'fur Ihr ' : locale === 'fr' ? 'pour votre ' : 'for your '}
+            </span>
             <span className={cn(
               "text-primary-foreground/80 italic transition-all duration-400",
               wordFading ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"
@@ -169,27 +170,27 @@ export function Hero({ locale }: HeroProps) {
             </span>
           </div>
 
-          {/* Description - two paragraphs for rich content */}
+          {/* Description */}
           <div className={cn(
-            "space-y-4 mb-12 transition-all duration-1000 delay-700",
+            "space-y-3 sm:space-y-4 mb-8 sm:mb-12 transition-all duration-1000 delay-700",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           )}>
-            <p className="text-sm sm:text-base text-primary-foreground/50 max-w-lg leading-relaxed font-light">
+            <p className="text-xs sm:text-sm md:text-base text-primary-foreground/50 max-w-lg leading-relaxed font-light">
               {content.subtitle}
             </p>
-            <p className="text-sm text-primary-foreground/35 max-w-lg leading-relaxed font-light hidden md:block">
+            <p className="text-xs sm:text-sm text-primary-foreground/35 max-w-lg leading-relaxed font-light hidden md:block">
               {content.subtitleExtra}
             </p>
           </div>
 
-          {/* CTAs with animation */}
+          {/* CTAs */}
           <div className={cn(
-            "flex flex-col sm:flex-row gap-4 mb-8 transition-all duration-1000 delay-[900ms]",
+            "flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8 transition-all duration-1000 delay-[900ms]",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           )}>
             <Button 
               size="lg" 
-              className="h-14 px-10 text-xs uppercase tracking-[0.2em] font-medium rounded-none bg-primary-foreground text-foreground hover:bg-primary-foreground/90 cursor-pointer" 
+              className="h-12 sm:h-14 px-6 sm:px-10 text-[10px] sm:text-xs uppercase tracking-[0.2em] font-medium rounded-none bg-primary-foreground text-foreground hover:bg-primary-foreground/90 cursor-pointer" 
               onClick={() => {
                 const collectionsSection = document.getElementById('collections');
                 if (collectionsSection) {
@@ -198,12 +199,12 @@ export function Hero({ locale }: HeroProps) {
               }}
             >
               {content.cta}
-              <ArrowRight className="ml-3 h-4 w-4" />
+              <ArrowRight className="ml-2 sm:ml-3 h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="h-14 px-10 text-xs uppercase tracking-[0.2em] font-medium bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 rounded-none" 
+              className="h-12 sm:h-14 px-6 sm:px-10 text-[10px] sm:text-xs uppercase tracking-[0.2em] font-medium bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 rounded-none" 
               asChild
             >
               <Link href={`/${locale === 'en' ? '' : locale + '/'}about`}>
@@ -214,37 +215,37 @@ export function Hero({ locale }: HeroProps) {
 
           {/* Trust line */}
           <p className={cn(
-            "text-[10px] uppercase tracking-[0.15em] text-primary-foreground/25 mb-10 transition-all duration-1000 delay-[1000ms]",
+            "text-[9px] sm:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.15em] text-primary-foreground/25 mb-6 sm:mb-10 transition-all duration-1000 delay-[1000ms]",
             isVisible ? "opacity-100" : "opacity-0"
           )}>
             {content.trustLine}
           </p>
 
-          {/* Stats - 4 columns */}
+          {/* Stats */}
           <div className={cn(
-            "grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 pt-8 border-t border-primary-foreground/10 transition-all duration-1000 delay-[1100ms]",
+            "grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 pt-6 sm:pt-8 border-t border-primary-foreground/10 transition-all duration-1000 delay-[1100ms]",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           )}>
             {[content.stat1, content.stat2, content.stat3, content.stat4].map((stat, i) => (
               <div key={i}>
-                <p className="text-2xl lg:text-3xl font-serif font-light text-primary-foreground">{stat.value}</p>
-                <p className="text-[10px] uppercase tracking-[0.15em] text-primary-foreground/40 mt-1">{stat.label}</p>
+                <p className="text-lg sm:text-2xl lg:text-3xl font-serif font-light text-primary-foreground">{stat.value}</p>
+                <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.15em] text-primary-foreground/40 mt-0.5 sm:mt-1">{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - hidden on short viewports */}
       <div className={cn(
-        "absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-all duration-1000 delay-[1300ms]",
+        "absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-1.5 sm:gap-2 transition-all duration-1000 delay-[1300ms] hidden sm:flex",
         isVisible ? "opacity-100" : "opacity-0"
       )}>
-        <span className="text-[9px] uppercase tracking-[0.4em] text-primary-foreground/30">Scroll</span>
-        <ChevronDown className="h-4 w-4 text-primary-foreground/30 animate-bounce" />
+        <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.4em] text-primary-foreground/30">Scroll</span>
+        <ChevronDown className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary-foreground/30 animate-bounce" />
       </div>
 
-      {/* Side text */}
+      {/* Side text - desktop only */}
       <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:block">
         <span className="text-[9px] uppercase tracking-[0.5em] text-primary-foreground/15 [writing-mode:vertical-lr] rotate-180">
           CBD Boutique &mdash; Est. 2019

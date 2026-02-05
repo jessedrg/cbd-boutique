@@ -81,8 +81,8 @@ export function LocalSEO({ locale }: LocalSEOProps) {
   const catTranslations = CATEGORY_TRANSLATIONS[locale as string] || CATEGORY_TRANSLATIONS.en;
 
   return (
-    <section className="py-20 lg:py-28 border-t border-border/30">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="py-12 sm:py-20 lg:py-28 border-t border-border/30">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Main SEO content */}
         <div className="max-w-4xl mx-auto mb-20">
           <h2 className="text-2xl lg:text-3xl font-serif font-light tracking-tight mb-3 text-center">
