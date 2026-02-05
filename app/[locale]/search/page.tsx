@@ -83,7 +83,7 @@ export default async function SearchPage({ params, searchParams }: SearchPagePro
     <div className="flex min-h-screen flex-col bg-background">
       <Header locale={validLocale} />
 
-      <main className="flex-1 pt-24 lg:pt-28">
+      <main className="flex-1 pt-28 lg:pt-36">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
           {/* Search Header */}
           <div className="mb-8">

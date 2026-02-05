@@ -258,7 +258,7 @@ export default function ContactPage() {
       <Header locale={locale} />
       
       {/* Hero */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
+      <section className="pt-36 pb-16 lg:pt-44 lg:pb-24">
         <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
           <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground mb-6 block">{content.hero.eyebrow}</span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light tracking-tight mb-6">{content.hero.title}</h1>

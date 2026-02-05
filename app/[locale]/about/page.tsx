@@ -285,7 +285,7 @@ export default async function AboutPage({ params }: PageProps) {
           />
           <div className="absolute inset-0 bg-foreground/50" />
         </div>
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20">
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-32 lg:pt-36">
           <span className="text-[10px] uppercase tracking-[0.4em] text-primary-foreground/70 mb-6 block">
             {content.hero.eyebrow}
           </span>

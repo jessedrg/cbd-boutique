@@ -227,7 +227,7 @@ export default async function DynamicPage({ params }: PageProps) {
       <Header locale={validLocale} />
       
       {/* Modern Hero Section - Side by side layout */}
-      <section className="pt-20 pb-16 lg:pt-24 lg:pb-24">
+      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Content */}
