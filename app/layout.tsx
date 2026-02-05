@@ -1,3 +1,4 @@
+// CBD Boutique - Root Layout
 import React from "react"
 import type { Metadata, Viewport } from 'next'
 import { Inter, Cormorant_Garamond, Playfair_Display } from 'next/font/google'
