@@ -4,69 +4,70 @@
 @custom-variant dark (&:is(.dark *));
 
 /* =============================================================================
-   CBD BOUTIQUE - LUXURY MINIMALIST DESIGN SYSTEM
-   Inspired by: Aesop, Le Labo, Byredo, architectural aesthetics
+   CBD BOUTIQUE - PREMIUM APOTHECARY DESIGN SYSTEM
+   Inspired by: Aesop, Le Labo, high-end botanical brands
+   Brand color: #0C5A76 deep teal
    ============================================================================= */
 
 :root {
-  /* Warm off-white backgrounds - like gallery walls */
-  --background: oklch(0.985 0.005 85);
-  --foreground: oklch(0.12 0.01 60);
+  /* Warm cream background - apothecary feel */
+  --background: oklch(0.975 0.006 85);
+  --foreground: oklch(0.15 0.01 60);
   
-  /* Cards with subtle warmth */
+  /* Cards - pure white for product contrast */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.12 0.01 60);
+  --card-foreground: oklch(0.15 0.01 60);
   
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.12 0.01 60);
+  --popover-foreground: oklch(0.15 0.01 60);
   
-  /* Primary - deep charcoal, almost black */
-  --primary: oklch(0.12 0.01 60);
-  --primary-foreground: oklch(0.985 0.005 85);
+  /* Primary - deep teal from logo #0C5A76 */
+  --primary: oklch(0.40 0.08 220);
+  --primary-foreground: oklch(0.98 0 0);
   
-  /* Secondary - warm stone gray */
-  --secondary: oklch(0.95 0.008 80);
-  --secondary-foreground: oklch(0.12 0.01 60);
+  /* Secondary - warm stone */
+  --secondary: oklch(0.94 0.008 80);
+  --secondary-foreground: oklch(0.15 0.01 60);
   
   /* Muted - soft warm gray */
-  --muted: oklch(0.92 0.008 80);
-  --muted-foreground: oklch(0.45 0.02 60);
+  --muted: oklch(0.93 0.006 80);
+  --muted-foreground: oklch(0.48 0.02 60);
   
-  /* Accent - sage green (CBD/botanical) */
-  --accent: oklch(0.55 0.08 145);
-  --accent-foreground: oklch(1 0 0);
+  /* Accent - teal from brand */
+  --accent: oklch(0.40 0.08 220);
+  --accent-foreground: oklch(0.98 0 0);
   
   /* Destructive */
   --destructive: oklch(0.55 0.18 25);
   --destructive-foreground: oklch(1 0 0);
   
-  /* Borders - barely visible, elegant */
-  --border: oklch(0.92 0.005 80);
-  --input: oklch(0.92 0.005 80);
-  --ring: oklch(0.55 0.08 145);
+  /* Borders - subtle warm */
+  --border: oklch(0.90 0.006 80);
+  --input: oklch(0.90 0.006 80);
+  --ring: oklch(0.40 0.08 220);
   
   /* Charts */
-  --chart-1: oklch(0.55 0.08 145);
-  --chart-2: oklch(0.60 0.06 180);
+  --chart-1: oklch(0.40 0.08 220);
+  --chart-2: oklch(0.55 0.06 180);
   --chart-3: oklch(0.50 0.10 100);
   --chart-4: oklch(0.65 0.04 60);
   --chart-5: oklch(0.45 0.08 30);
   
-  /* Minimal radius - architectural feel */
-  --radius: 0.125rem;
+  /* Architectural minimal radius */
+  --radius: 0.25rem;
   
   /* Sidebar */
-  --sidebar: oklch(0.985 0.005 85);
-  --sidebar-foreground: oklch(0.12 0.01 60);
-  --sidebar-primary: oklch(0.12 0.01 60);
-  --sidebar-primary-foreground: oklch(0.985 0.005 85);
-  --sidebar-accent: oklch(0.95 0.008 80);
-  --sidebar-accent-foreground: oklch(0.12 0.01 60);
-  --sidebar-border: oklch(0.92 0.005 80);
-  --sidebar-ring: oklch(0.55 0.08 145);
+  --sidebar: oklch(0.975 0.006 85);
+  --sidebar-foreground: oklch(0.15 0.01 60);
+  --sidebar-primary: oklch(0.40 0.08 220);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.94 0.008 80);
+  --sidebar-accent-foreground: oklch(0.15 0.01 60);
+  --sidebar-border: oklch(0.90 0.006 80);
+  --sidebar-ring: oklch(0.40 0.08 220);
   
-  /* Success - sage green */
-  --success: oklch(0.55 0.08 145);
+  /* Success */
+  --success: oklch(0.55 0.12 155);
   --success-foreground: oklch(1 0 0);
 }
 
@@ -77,19 +78,19 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: oklch(0.55 0.08 220);
+  --primary-foreground: oklch(0.98 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --accent: oklch(0.55 0.08 220);
+  --accent-foreground: oklch(0.98 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  --ring: oklch(0.55 0.08 220);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -107,7 +108,7 @@
 
 @theme inline {
   --font-sans: 'Inter', 'Inter Fallback', system-ui, sans-serif;
-  --font-serif: 'Playfair Display', 'Playfair Display Fallback', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', 'Cormorant Garamond Fallback', Georgia, serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);

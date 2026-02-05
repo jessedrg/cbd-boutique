@@ -32,11 +32,12 @@ export async function ShopifyProducts({ locale, collection, limit = 8, title }: 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {title && (
             <div className="text-center mb-6 sm:mb-8 lg:mb-12">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-medium">{title}</h2>
+              <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground mb-3 block">Shop</span>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-light tracking-tight">{title}</h2>
             </div>
           )}
           <div className="text-center py-12">
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground font-light">
               {error ? `Error: ${error}` : 'No products available yet. Add products to your Shopify store.'}
             </p>
           </div>
@@ -50,7 +51,8 @@ export async function ShopifyProducts({ locale, collection, limit = 8, title }: 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {title && (
           <div className="text-center mb-6 sm:mb-8 lg:mb-12">
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-medium">{title}</h2>
+            <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground mb-3 block">Shop</span>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-light tracking-tight">{title}</h2>
           </div>
         )}
 

@@ -1,6 +1,6 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
-import { Inter, Cormorant_Garamond } from 'next/font/google'
+import { Inter, Cormorant_Garamond, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#f5f4f0',
+  themeColor: '#f7f5f0',
   width: 'device-width',
   initialScale: 1,
 }
