@@ -27,6 +27,7 @@ const CITIES_DB = citiesData as Record<string, CityData[]>;
 import { Leaf, FlaskConical, Truck, Shield, Check, ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FAQSection, ProductSchema } from "@/components/seo/faq-section";
+import { getIndexDecision, PRIMARY_COUNTRY, type PageSignals } from "@/lib/seo-index";
 
 // Force dynamic - no build time generation
 export const dynamic = 'force-dynamic';
@@ -43,7 +44,7 @@ function parseSlug(slugParts: string[], locale: Locale) {
   
   let detectedCategory: Category | null = null;
   let detectedIntent: string | null = null;
-  let detectedCity: { name: string; slug: string } | null = null;
+  let detectedCity: { name: string; slug: string; population?: number; country?: string } | null = null;
   
   // Find category
   for (const cat of CATEGORIES) {
@@ -70,7 +71,7 @@ function parseSlug(slugParts: string[], locale: Locale) {
     if (cities) {
       for (const city of cities) {
         if (fullSlug.includes(city.slug)) {
-          detectedCity = { name: city.name, slug: city.slug };
+          detectedCity = { name: city.name, slug: city.slug, population: city.population, country };
           break;
         }
       }
@@ -153,6 +154,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const description = generateDescription(category, intent, city, validLocale);
   const canonicalUrl = `/${locale}/${slug?.join('/') || ''}`;
   const ogImage = category ? (OG_IMAGES[category] || OG_IMAGES.default) : OG_IMAGES.default;
+
+  // Determine if this page should be indexed using the SEO index strategy
+  const indexDecision = getIndexDecision({
+    locale: validLocale,
+    category,
+    intent,
+    city,
+  });
   
   return {
     title,
@@ -173,7 +182,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
       images: [ogImage],
     },
-    robots: { index: true, follow: true },
+    robots: {
+      index: indexDecision.index,
+      follow: true,
+      "max-snippet": indexDecision.index ? -1 : 0,
+      "max-image-preview": indexDecision.index ? "large" as const : "none" as const,
+    },
   };
 }
 

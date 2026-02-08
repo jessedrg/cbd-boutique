@@ -2,34 +2,41 @@ const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://cbdboutique.io'
 
 export async function GET() {
   const robotsTxt = `# CBD Boutique Robots.txt
-# https://cbdboutique.io
+# ${BASE_URL}
+# Updated: Only indexable pages are in sitemaps. Thin city pages are noindex via meta.
 
 User-agent: *
 Allow: /
 
-# Sitemaps
+# Sitemaps (only high-quality indexed pages)
 Sitemap: ${BASE_URL}/sitemap.xml
 
 # Crawl-delay for polite crawling
 Crawl-delay: 1
 
-# Block admin and API routes
+# Block admin, API, and internal routes
 Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
 
-# Allow all search engines
+# Block old massive sitemaps path (no longer generated)
+Disallow: /sitemaps-massive/
+
+# Googlebot specific - no crawl delay needed
 User-agent: Googlebot
 Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /sitemaps-massive/
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 2
 
 User-agent: Yandex
 Allow: /
-
-User-agent: Baiduspider
-Allow: /
+Crawl-delay: 2
 `
 
   return new Response(robotsTxt, {
