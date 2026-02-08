@@ -2,20 +2,12 @@ import { SUPPORTED_LOCALES } from "@/lib/seo-data";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cbdboutique.io";
 
-// Locales that have massive city sitemaps
-const MASSIVE_LOCALES = ['es', 'en', 'de', 'fr', 'it', 'pt', 'nl', 'pl', 'cs', 'el'];
-const PARTS_PER_LOCALE = 10;
-
 export async function GET() {
+  // Only reference sitemaps with indexable content.
+  // The massive city sitemaps have been removed - they were thin content.
   const sitemaps = [
     `${BASE_URL}/sitemaps/pages.xml`,
     ...SUPPORTED_LOCALES.map(locale => `${BASE_URL}/sitemaps/${locale}.xml`),
-    // Add massive city sitemaps
-    ...MASSIVE_LOCALES.flatMap(locale => 
-      Array.from({ length: PARTS_PER_LOCALE }, (_, i) => 
-        `${BASE_URL}/sitemaps-massive/massive-${locale}-${i + 1}.xml`
-      )
-    ),
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
